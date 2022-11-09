@@ -21,8 +21,12 @@ public class Logement extends ConsoCarbone {
         this.superficie = superficie;
     }
 
-    public static int getMoyenne() {
-        return 335 + 675 + 1696;
+    public static void moyenEmpreinteCarboneLogement() {
+        System.out.println(
+                "Empreinte carbone moyenne d'un français par rapport au logement : \n" +
+                "Equipement des logements : 335 Kg eq CO2/an\n" +
+                "Construction & gros entretien : 675 Kg eq CO2/an\n" +
+                "Energie et utilités : 1696 Kg eq CO2/an");
     }
 
     @Override
@@ -32,12 +36,12 @@ public class Logement extends ConsoCarbone {
 
     @Override
     public String toString() {
-        return "Logement{" +
-                "id=" + id +
-                ", impact=" + impact +
-                ", ce=" + ce.name() + ":" + ce.alpha +
-                ", superficie=" + superficie +
-                '}';
+        return String.format("Logement{" +
+                "id=%d" +
+                ", impact=%.2f" +
+                ", ce=%s : %.3f" +
+                ", superficie=%d" +
+                "}", this.id, this.impact, this.ce.name(), this.ce.alpha, this.superficie);
     }
 
     @Override
@@ -46,6 +50,8 @@ public class Logement extends ConsoCarbone {
     }
 
     public static void main(String[] args) {
-        System.out.println(Logement.getMoyenne());
+        System.out.println(new Logement(50, CE.B));
+        System.out.println(new Logement(25, CE.F));
+        Logement.moyenEmpreinteCarboneLogement();
     }
 }

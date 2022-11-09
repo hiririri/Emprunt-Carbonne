@@ -32,8 +32,13 @@ public class Alimentation extends ConsoCarbone{
         this.txVege = txVege;
     }
 
-    public static int getMoyenne() {
-        return 263 + 538 + 408 + 1144;
+    public static void moyenEmpreinteCarboneAlimentation() {
+        System.out.println(
+                "Empreinte carbone moyenne d'un français par rapport à l'alimentation : \n" +
+                "Boissons : 263 Kg eq CO2/an\n" +
+                "Produits laitier en oeufs : 408 Kg eq CO2/an\n" +
+                "Viandes et poissons : 1144 Kg eq CO2/an\n" +
+                "Autres : 538 Kg eq CO2/an");
     }
 
     @Override
@@ -50,17 +55,17 @@ public class Alimentation extends ConsoCarbone{
 
     @Override
     public String toString() {
-        return "Alimentation{" +
-                "Id=" + id +
-                ", Impact=" + impact +
-                ", Taux Boeuf=" + txBoeuf +
-                ", Taux Vege=" + txVege +
-                '}';
+        return String.format("Alimentation{" +
+                "Id=%d " +
+                "Impact=%.2f " +
+                "Taux Boeuf=%.2f " +
+                "Taux Vege=%.2f}", this.id, this.impact, this.txBoeuf, this.txVege);
     }
 
     public static void main(String[] args) {
-        Alimentation a = new Alimentation(0.475, 0.225);
-        System.out.println(a);
-        System.out.println(Alimentation.getMoyenne());
+        Alimentation alimentation = new Alimentation(0.475, 0.225);
+        System.out.println(alimentation);
+        System.out.println(new Alimentation(0.2, 0.5));
+        Alimentation.moyenEmpreinteCarboneAlimentation();
     }
 }

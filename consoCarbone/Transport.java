@@ -70,17 +70,27 @@ public class Transport extends ConsoCarbone{
 
     @Override
     public String toString() {
-        return "Transport{" +
-                "id=" + id +
-                ", impact=" + impact +
-                ", possede=" + possede +
-                ", taille=" + taille.name() + ":" + taille.emet +
-                ", kilomAnnee=" + kilomAnnee +
-                ", amortissement=" + amortissement +
-                '}';
+        return String.format("Transport{" +
+                "id=%d" +
+                ", impact=%.2f" +
+                ", possede=%b" +
+                ", taille=%s : %.1f" +
+                ", kilomAnnee=%d" +
+                ", amortissement=%d" +
+                "}", this.id, this.impact, this.possede, this.taille.name(), this.taille.emet, this.kilomAnnee, this.amortissement);
     }
 
-    public static int getMoyenne() {
-        return 85 + 383 + 480 + 1972;
+    public static void moyenEmpreinteCarboneTransport() {
+        System.out.println(
+                "Empreinte carbone moyenne d'un français par rapport au transport : \n" +
+                "Train et bus : 85 Kg eq CO2/an\n" +
+                "Fret et messagerie : 383 Kg eq CO2/an\n" +
+                "Avion : 480 Kg eq CO2/an\n" +
+                "Voiture : 1972 Kg eq CO2/an");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Transport(true,Taille.P,4000,8));
+        Transport.moyenEmpreinteCarboneTransport();
     }
 }
