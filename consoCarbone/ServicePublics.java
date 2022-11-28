@@ -20,4 +20,17 @@ public class ServicePublics extends ConsoCarbone {
     public void calculImpact() {
         this.impact = 1.5 * 1750;
     }
+
+    @Override
+    public String toString() {
+        return String.format("ServicePublics{" +
+                "id=%d" +
+                ", impact=%.2f" +
+                '}', this.id, this.impact);
+    }
+
+    public static void moyenEmpreinteCarboneServicePublics() {
+        System.out.println("Empreinte carbone moyenne d'un français par rapport au service publics : \n" +
+                           "Service Public Santé : 1489 Kg eq CO2/an");
+    }
 }
