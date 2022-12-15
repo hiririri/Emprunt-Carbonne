@@ -40,14 +40,10 @@ public class Utilisateur {
     }
 
     public double calculerEmpreinte() {
-        int impactTransports = 0;
-        int impactLogements  = 0;
-
-        for (Transport voiture : lstVoitures)
-            impactTransports += voiture.getImpact();
-
         for (Logement logement : lstLogements)
-            impactLogements += logement.getImpact();
+            logement.calculImpact();
+        for (Transport transport : lstVoitures)
+            transport.calculImpact();
 
         this.alimentation.calculImpact();
         this.bienConso.   calculImpact();
@@ -56,8 +52,8 @@ public class Utilisateur {
         return this.alimentation.getImpact() +
                this.bienConso.   getImpact() +
                this.services.    getImpact() +
-               impactTransports +
-               impactLogements;
+               this.getImpactLogements() +
+               this.getImpactTransports();
     }
 
     private double getImpactTransports() {
@@ -69,6 +65,7 @@ public class Utilisateur {
     }
 
     public void detaillerEmpreinte() {
+        this.calculerEmpreinte();
         String dtl = String.format("%-17s : %.2f\n", "Alimentation"    , this.alimentation.getImpact()) +
                      String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
                      String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
