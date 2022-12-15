@@ -1,16 +1,22 @@
 package utilisateur;
 
 import consoCarbone.*;
+import org.w3c.dom.css.Counter;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Utilisateur {
     private Alimentation   alimentation;
     private BienConso      bienConso;
-    private Logement       logement;
-    private Transport      transport;
     private ServicePublics services;
 
-    public Utilisateur() {
+    private List<Logement> lstLogements;
+    private List<Transport> lstVoitures;
 
+    public Utilisateur() {
+        this.lstLogements = new ArrayList<>();
+        this.lstVoitures  = new ArrayList<>();
     }
 
     public void setAlimentation(Alimentation alimentation) {
@@ -21,39 +27,88 @@ public class Utilisateur {
         this.bienConso = bienConso;
     }
 
-    public void setLogement(Logement logement) {
-        this.logement = logement;
-    }
-
-    public void setTransport(Transport transport) {
-        this.transport = transport;
-    }
-
     public void setServices(ServicePublics services) {
         this.services = services;
     }
 
+    public void addLogement(Logement logement) {
+        this.lstLogements.add(logement);
+    }
+
+    public void addVoiture(Transport transport) {
+        this.lstVoitures.add(transport);
+    }
+
     public double calculerEmpreinte() {
+        int impactTransports = 0;
+        int impactLogements  = 0;
+
+        for (Transport voiture : lstVoitures)
+            impactTransports += voiture.getImpact();
+
+        for (Logement logement : lstLogements)
+            impactLogements += logement.getImpact();
+
         this.alimentation.calculImpact();
         this.bienConso.   calculImpact();
-        this.logement.    calculImpact();
-        this.transport.   calculImpact();
         this.services.    calculImpact();
 
         return this.alimentation.getImpact() +
                this.bienConso.   getImpact() +
-               this.logement.    getImpact() +
-               this.transport.   getImpact() +
-               this.services.    getImpact();
+               this.services.    getImpact() +
+               impactTransports +
+               impactLogements;
+    }
+
+    private double getImpactTransports() {
+        return this.lstVoitures.stream().mapToDouble(ConsoCarbone::getImpact).sum();
+    }
+
+    private double getImpactLogements() {
+        return this.lstLogements.stream().mapToDouble(ConsoCarbone::getImpact).sum();
     }
 
     public void detaillerEmpreinte() {
         String dtl = String.format("%-17s : %.2f\n", "Alimentation"    , this.alimentation.getImpact()) +
                      String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
-                     String.format("%-17s : %.2f\n", "Logement"        , this.logement    .getImpact()) +
-                     String.format("%-17s : %.2f\n", "Transport"       , this.transport   .getImpact()) +
+                     String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
+                     String.format("%-17s : %.2f\n", "Transport"       , this.getImpactTransports()   ) +
                      String.format("%-17s : %.2f\n", "Services Publics", this.services    .getImpact());
 
         System.out.println(dtl);
+    }
+
+    public void recommender() {
+        HashMap<String, Double> map = new HashMap<>();
+
+        map.put("alimentation",this.alimentation.getImpact());
+        map.put("bienConso",this.bienConso.getImpact());
+        map.put("services",this.services.getImpact());
+        map.put("logement",this.getImpactLogements());
+        map.put("transport",this.getImpactTransports());
+
+        map = map.entrySet()
+                 .stream()
+                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                 .collect(Collectors.toMap(Map.Entry::getKey,
+                          Map.Entry::getValue,
+                          (e1, e2) -> e1,
+                          LinkedHashMap::new));
+
+        System.out.println("Liste des consommations carbonne");
+        int[] counter = new int[1];
+        map.entrySet().stream().toList().forEach(elt->{
+            System.out.printf("%d-->%s\n", ++counter[0], elt);
+        });
+
+        String consoMax = map.entrySet()
+                .stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .stream()
+                .map(Map.Entry::getKey)
+                .toList()
+                .get(0);
+
+        System.out.println("Votre consommation dans le secteur " + consoMax + " est le plus élevé. Soyez plus attentif à ce secteur.");
     }
 }
