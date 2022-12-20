@@ -1,6 +1,6 @@
 package vue.gui;
 
-import controler.Controleur;
+import controleur.Controleur;
 import model.consoCarbone.CE;
 import model.consoCarbone.Logement;
 

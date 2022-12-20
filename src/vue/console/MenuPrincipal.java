@@ -1,6 +1,6 @@
 package vue.console;
 
-import controler.Controleur;
+import controleur.Controleur;
 import model.consoCarbone.*;
 
 import java.util.ArrayList;

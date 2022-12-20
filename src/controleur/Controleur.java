@@ -1,4 +1,4 @@
-package controler;
+package controleur;
 
 import model.consoCarbone.Logement;
 import model.consoCarbone.Transport;
