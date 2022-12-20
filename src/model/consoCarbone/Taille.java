@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 public enum Taille {
     P(4.2),

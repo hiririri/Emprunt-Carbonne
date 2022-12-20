@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 /**
  * This is a class simulates carbon consume of nutrition
@@ -104,9 +104,7 @@ public class Alimentation extends ConsoCarbone{
     }
 
     public static void main(String[] args) {
-        Alimentation alimentation = new Alimentation(0.475, 0.225);
+        Alimentation alimentation = new Alimentation(0.98, 0.97);
         System.out.println(alimentation);
-        System.out.println(new Alimentation(0.2, 0.5));
-        Alimentation.moyenEmpreinteCarboneAlimentation();
     }
 }

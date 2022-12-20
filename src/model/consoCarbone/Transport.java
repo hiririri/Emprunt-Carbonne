@@ -1,6 +1,4 @@
-package consoCarbone;
-
-import static java.lang.Math.E;
+package model.consoCarbone;
 
 /**
  * This is a class simulates carbon consume of transport
@@ -13,20 +11,32 @@ public class Transport extends ConsoCarbone{
 
     /**
      * Class constructor specifying possession, size, kilometer and amortization of transport.
-     * @param possede possession of transport
      * @param taille size of transport
      * @param kilomAnnee kilometer of transport
      * @param amortissement amortization of transport
      */
-    public Transport(boolean possede, Taille taille, int kilomAnnee, int amortissement) {
+    public Transport(Taille taille, int kilomAnnee, int amortissement) {
         super();
 
-        this.possede = possede;
+        this.possede = true;
         this.taille = taille;
         this.kilomAnnee = kilomAnnee;
         this.amortissement = amortissement;
 
         this.calculImpact();
+    }
+
+    public Transport(boolean possede) {
+        super();
+
+        this.impact = 0;
+        this.taille = Taille.G;
+        this.kilomAnnee = 0;
+        this.amortissement = 1;
+    }
+
+    public Transport() {
+        this(false);
     }
 
     /**
@@ -98,10 +108,7 @@ public class Transport extends ConsoCarbone{
      */
     @Override
     public void calculImpact() {
-        if (!this.possede)
-            this.impact = 0;
-        else
-            this.impact = this.kilomAnnee * 1.93 * E-4 + this.taille.emet / this.amortissement;
+            this.impact = this.kilomAnnee * 1.93 * Math.pow(10,-4) + this.taille.emet / this.amortissement;
     }
 
     /**
@@ -145,7 +152,7 @@ public class Transport extends ConsoCarbone{
     }
 
     public static void main(String[] args) {
-        System.out.println(new Transport(true,Taille.P,4000,8));
+        System.out.println(new Transport(Taille.P,1000,6));
         Transport.moyenEmpreinteCarboneTransport();
     }
 }

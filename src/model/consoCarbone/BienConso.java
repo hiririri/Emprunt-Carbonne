@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 /**
  * This is a class simulates carbon consume of object bought.

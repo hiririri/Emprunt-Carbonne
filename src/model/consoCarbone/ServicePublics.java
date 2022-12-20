@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 /**
  * This is a class simulates carbon consume of public service.
@@ -11,7 +11,11 @@ public class ServicePublics extends ConsoCarbone {
      * @return instance of ServicePublics
      */
     public static ServicePublics creatServicePublics() {
-        return (ServicePublics.instance == null) ? new ServicePublics() : null;
+        if (ServicePublics.instance == null) {
+            ServicePublics.instance = new ServicePublics();
+            return ServicePublics.instance;
+        }
+        return null;
     }
 
     /**
@@ -53,5 +57,9 @@ public class ServicePublics extends ConsoCarbone {
     public static void moyenEmpreinteCarboneServicePublics() {
         System.out.println("Empreinte carbone moyenne d'un français par rapport au service publics : \n" +
                            "Service Public Santé : 1489 Kg eq CO2/an");
+    }
+
+    public static void main(String[] args) {
+
     }
 }

@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 public enum CE {
     A(0.005),

@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 public class Logement extends ConsoCarbone {
     private CE ce;
@@ -13,12 +13,20 @@ public class Logement extends ConsoCarbone {
         this.calculImpact();
     }
 
+    public Logement() {
+        super();
+    }
+
     public int getSuperficie() {
         return this.superficie;
     }
 
     public void setSuperficie(int superficie) {
         this.superficie = superficie;
+    }
+
+    public void setCe(CE ce) {
+        this.ce = ce;
     }
 
     public static void moyenEmpreinteCarboneLogement() {

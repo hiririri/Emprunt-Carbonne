@@ -1,4 +1,4 @@
-package consoCarbone;
+package model.consoCarbone;
 
 public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
     private static int nbClass;
@@ -27,4 +27,12 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
     }
 
     public abstract void calculImpact();
+
+    @Override
+    public String toString() {
+        return "ConsoCarbone{" +
+                "id=" + id +
+                ", impact=" + impact +
+                '}';
+    }
 }
