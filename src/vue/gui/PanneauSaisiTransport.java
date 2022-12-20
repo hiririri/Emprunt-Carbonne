@@ -1,8 +1,6 @@
 package vue.gui;
 
 import controleur.Controleur;
-import model.consoCarbone.Taille;
-import model.consoCarbone.Transport;
 
 import javax.swing.*;
 import java.awt.*;
@@ -119,7 +117,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                 }
                 // Ne possede pas de voiture
                 else {
-                    this.controleur.addVoiture(new Transport(false));
+                    this.controleur.addVoiture(this.controleur.getTransport(false));
                     this.removeAll();
                     this.controleur.terminerTransport();
                     this.controleur.afficheResultat();
@@ -134,23 +132,25 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
             }
             else {
                 for (JPanel panel : lst) {
-                    Transport t = new Transport();
-                    t.setPossede(true);
+                    char taille = 0;
+                    int kilomettre = 0, amortissement = 1;
                     for (Component component : panel.getComponents()) {
                         if (component instanceof JRadioButton) {
                             if (((JRadioButton) component).isSelected() && ((JRadioButton) component).getText().equals("P "))
-                                t.setTaille(Taille.P);
+                                taille = ((JRadioButton) component).getText().charAt(0);
                             if (((JRadioButton) component).isSelected() && ((JRadioButton) component).getText().equals("G "))
-                                t.setTaille(Taille.G);
+                                taille = ((JRadioButton) component).getText().charAt(0);
                         }
                         if (component instanceof JTextField) {
-                            if (((JTextField) component).equals(panel.getComponent(3)))
-                                t.setKilomAnnee(Integer.parseInt(((JTextField) component).getText()));
-                            if (((JTextField) component).equals(panel.getComponent(5)))
-                                t.setAmortissement(Integer.parseInt(((JTextField) component).getText()));
+                            if (((JTextField) component).equals(panel.getComponent(3))) {
+                                kilomettre = Integer.parseInt(((JTextField) component).getText());
+                            }
+                            if (((JTextField) component).equals(panel.getComponent(5))) {
+                                amortissement = Integer.parseInt(((JTextField) component).getText());
+                            }
                         }
                     }
-                    this.controleur.addVoiture(t);
+                    this.controleur.addVoiture(this.controleur.getTransport(taille,kilomettre,amortissement));
                     this.controleur.calculerImpact();
                     this.remove(panel);
                 }

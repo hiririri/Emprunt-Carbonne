@@ -1,8 +1,6 @@
 package vue.gui;
 
 import controleur.Controleur;
-import model.consoCarbone.CE;
-import model.consoCarbone.Logement;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,7 +97,7 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                 }
                 // Ne possede pas de logement
                 else {
-                    this.controleur.addLogement(new Logement(0,CE.A));
+                    this.controleur.addLogement(this.controleur.getLogement(0,'A'));
                     this.removeAll();
                     this.controleur.terminerLogement();
                     this.controleur.afficheResultat();
@@ -114,25 +112,26 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
             }
             //Recuperer les logements à l'utilisateur
             else {
-                Logement l = new Logement();
+                int superficie = 0;
+                char niveauEnergie = 0;
                 for (JPanel panel : lst) {
                     for (Component component : panel.getComponents()) {
                         if (component instanceof JTextField)
-                            l.setSuperficie(Integer.parseInt(((JTextField) component).getText()));
+                            superficie = Integer.parseInt(((JTextField) component).getText());
                         if (component instanceof JComboBox<?>) {
                             if (((JComboBox<?>) component).getSelectedItem() != null) {
-                                if (((JComboBox<?>) component).getSelectedItem().equals("A")) l.setCe(CE.A);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("B")) l.setCe(CE.B);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("C")) l.setCe(CE.C);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("D")) l.setCe(CE.D);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("E")) l.setCe(CE.E);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("F")) l.setCe(CE.F);
-                                if (((JComboBox<?>) component).getSelectedItem().equals("G")) l.setCe(CE.G);
+                                if (((JComboBox<?>) component).getSelectedItem().equals("A")) niveauEnergie = 'A';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("B")) niveauEnergie = 'B';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("C")) niveauEnergie = 'C';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("D")) niveauEnergie = 'D';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("E")) niveauEnergie = 'E';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("F")) niveauEnergie = 'F';
+                                if (((JComboBox<?>) component).getSelectedItem().equals("G")) niveauEnergie = 'G';
                             }
                         }
                     }
                 }
-                this.controleur.addLogement(l);
+                this.controleur.addLogement(this.controleur.getLogement(superficie,niveauEnergie));
                 this.removeAll();
                 this.controleur.terminerLogement();
                 this.controleur.afficheResultat();

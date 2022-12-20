@@ -26,13 +26,32 @@ public class Controleur {
         switch (action) {
             case '1' -> this.menu.frameCUI();
             case '2' -> this.frame = new FramePrincipal(this);
+            case '3' -> this.menu.chargerUtilisateur();
             default -> System.exit(0);
         }
+    }
+
+    public void chargerUtilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie, char taille, int kilomettre, int amortissement) {
+        Utilisateur utilisateurCharge = new Utilisateur(txB,txV,montant,superficie,niveauEnergie,taille,kilomettre,amortissement);
+        utilisateurCharge.setServices(this.utilisateur.getServicePublics());
+        this.menu.afficherNouvelUtilisateur(utilisateurCharge);
     }
 
     public void retourner() {
         this.menu = new MenuPrincipal(this);
         this.lancer();
+    }
+
+    public Transport getTransport(char taille, int kilomettre, int amortissement) {
+        return this.utilisateur.getTransport(taille,kilomettre,amortissement);
+    }
+
+    public Transport getTransport(boolean possede) {
+        return this.utilisateur.getTransport(possede);
+    }
+
+    public Logement getLogement(int superficie, char niveauEnergie) {
+        return this.utilisateur.getLogement(superficie,niveauEnergie);
     }
 
     public void setResultatPane(double res) {
@@ -98,6 +117,4 @@ public class Controleur {
     public static void main(String[] args) {
         new Controleur();
     }
-
-
 }

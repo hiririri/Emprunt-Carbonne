@@ -2,13 +2,14 @@ package model.utilisateur;
 
 import model.consoCarbone.*;
 
+import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utilisateur {
     private Alimentation   alimentation;
     private BienConso      bienConso;
-    private ServicePublics services;
+    private ServicePublics service;
 
     private List<Logement> lstLogements;
     private List<Transport> lstVoitures;
@@ -16,9 +17,45 @@ public class Utilisateur {
     public Utilisateur() {
         this.alimentation = new Alimentation(0,0);
         this.bienConso = new BienConso(0);
-        this.services = ServicePublics.creatServicePublics();
+        this.service = ServicePublics.creatServicePublics();
         this.lstLogements = new ArrayList<>();
         this.lstVoitures  = new ArrayList<>();
+    }
+
+    public Utilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie,
+                       char taille, int kilomettre, int amortissement) {
+        this.alimentation = new Alimentation(txB,txV);
+        this.bienConso = new BienConso(montant);
+        this.lstLogements = new ArrayList<>();
+        this.lstVoitures  = new ArrayList<>();
+
+        this.lstLogements.add(this.getLogement(superficie, niveauEnergie));
+        this.lstVoitures.add(this.getTransport(taille,kilomettre,amortissement));
+    }
+
+    public Logement getLogement(int superficie, char niveauEnergie) {
+        switch (niveauEnergie) {
+            case 'A' -> {return new Logement(superficie, CE.A);}
+            case 'B' -> {return new Logement(superficie, CE.B);}
+            case 'C' -> {return new Logement(superficie, CE.C);}
+            case 'D' -> {return new Logement(superficie, CE.D);}
+            case 'E' -> {return new Logement(superficie, CE.E);}
+            case 'F' -> {return new Logement(superficie, CE.F);}
+            case 'G' -> {return new Logement(superficie, CE.G);}
+        }
+        return null;
+    }
+
+    public Transport getTransport(char taille, int kilomettre, int amortissement) {
+        switch (taille) {
+            case 'P' -> {return new Transport(Taille.P, kilomettre, amortissement);}
+            case 'G' -> {return new Transport(Taille.G, kilomettre, amortissement);}
+        }
+        return null;
+    }
+
+    public Transport getTransport(boolean possede) {
+        return new Transport(possede);
     }
 
     public void setAlimentation(double txB, double txV) {
@@ -39,7 +76,11 @@ public class Utilisateur {
     }
 
     public void setServices(ServicePublics services) {
-        this.services = services;
+        this.service = services;
+    }
+
+    public ServicePublics getServicePublics() {
+        return this.service;
     }
 
     public void addLogement(Logement logement) {
@@ -61,11 +102,11 @@ public class Utilisateur {
 
         this.alimentation.calculImpact();
         this.bienConso.   calculImpact();
-        this.services.    calculImpact();
+        this.service.     calculImpact();
 
         return this.alimentation.getImpact() +
                this.bienConso.   getImpact() +
-               this.services.    getImpact() +
+               this.service.    getImpact() +
                this.getImpactLogements() +
                this.getImpactTransports();
     }
@@ -84,7 +125,7 @@ public class Utilisateur {
                      String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
                      String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
                      String.format("%-17s : %.2f\n", "Transport"       , this.getImpactTransports()   ) +
-                     String.format("%-17s : %.2f\n", "Services Publics", this.services    .getImpact());
+                     String.format("%-17s : %.2f\n", "Services Publics", this.service     .getImpact());
 
         System.out.println(dtl);
     }
@@ -94,7 +135,7 @@ public class Utilisateur {
 
         map.put("Alimentation",this.alimentation.getImpact());
         map.put("Bien Consommation",this.bienConso.getImpact());
-        map.put("Services Publics",this.services.getImpact());
+        map.put("Service Publics",this.service.getImpact());
         map.put("Logement",this.getImpactLogements());
         map.put("Transport",this.getImpactTransports());
 
@@ -108,9 +149,6 @@ public class Utilisateur {
 
         System.out.println("Liste des consommations carbonne");
         int[] counter = new int[1];
-//        map.entrySet().stream().toList().forEach(elt->{
-//            System.out.printf("%d-->%s\n", ++counter[0], elt);
-//        });
         String lstRanked = "";
         for (String key : map.keySet())
             lstRanked += String.format("%d --> %s : %.2f\n", ++counter[0], key, map.get(key));
@@ -123,7 +161,15 @@ public class Utilisateur {
                 .map(Map.Entry::getKey)
                 .toList()
                 .get(0);
+        System.out.println("Votre consommation dans le secteur '" + consoMax + "' est le plus eleve.\n" +
+                           "Voici quelque reconmmandation qui pourrait utile pour vous.");
 
-        System.out.println("Votre consommation dans le secteur '" + consoMax + "' est le plus élevé. Soyez plus attentif à ce secteur.");
+        switch (consoMax) {
+            case "Alimentation"      -> System.out.println("Vous pouvez réduire la consommation de viande et de charcuterie et augmenter celle des légumes secs et des fruits à coques");
+            case "Bien Consommation" -> System.out.println("Vous pouvez économiser votre dépenses annuels et votre argent.");
+            case "Transport"         -> System.out.println("Vous pouvez voyager en train qui pollue 32 fois moins que circuler en voiture, et 23 fois moins que voyager par les airs.");
+            case "Logement"          -> System.out.println("Vous pouvez débrancher les appareils en veille et éteindre les lumières ou changer de système de chauffage etc.");
+            default                  -> System.out.println("L’Etat doit aider les services publics à se réformer pour qu’ils puissent le plus rapidement possible être neutres en carbone.");
+        }
     }
 }
