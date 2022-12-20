@@ -58,8 +58,4 @@ public class ServicePublics extends ConsoCarbone {
         System.out.println("Empreinte carbone moyenne d'un français par rapport au service publics : \n" +
                            "Service Public Santé : 1489 Kg eq CO2/an");
     }
-
-    public static void main(String[] args) {
-
-    }
 }

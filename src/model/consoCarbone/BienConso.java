@@ -76,10 +76,4 @@ public class BienConso extends ConsoCarbone{
                 "Autres Biens et Services  : 682 Kg eq CO2/an\n" +
                 "Achats et usages Internet et technologies : 1180 Kg eq CO2/an");
     }
-
-    public static void main(String[] args) {
-        System.out.println(new BienConso(2000));
-        System.out.println(new BienConso(4000));
-        BienConso.moyenEmpreinteCarboneBienConso();
-    }
 }

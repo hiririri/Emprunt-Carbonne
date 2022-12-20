@@ -150,9 +150,4 @@ public class Transport extends ConsoCarbone{
                 "Avion : 480 Kg eq CO2/an\n" +
                 "Voiture : 1972 Kg eq CO2/an");
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Transport(Taille.P,1000,6));
-        Transport.moyenEmpreinteCarboneTransport();
-    }
 }

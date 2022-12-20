@@ -103,8 +103,5 @@ public class Alimentation extends ConsoCarbone{
                 "Taux Vege=%.2f}", this.id, this.impact, this.txBoeuf, this.txVege);
     }
 
-    public static void main(String[] args) {
-        Alimentation alimentation = new Alimentation(0.98, 0.97);
-        System.out.println(alimentation);
-    }
+
 }

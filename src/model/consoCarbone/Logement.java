@@ -56,10 +56,4 @@ public class Logement extends ConsoCarbone {
     public int compareTo(ConsoCarbone o) {
         return (int)(this.impact - o.impact);
     }
-
-    public static void main(String[] args) {
-        System.out.println(new Logement(50, CE.B));
-        System.out.println(new Logement(25, CE.F));
-        Logement.moyenEmpreinteCarboneLogement();
-    }
 }
