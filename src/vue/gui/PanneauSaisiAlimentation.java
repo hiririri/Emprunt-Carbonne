@@ -78,7 +78,7 @@ public class PanneauSaisiAlimentation extends JPanel implements ActionListener {
         if (!this.tfVege.getText().equals("") && !this.tfBoeuf.equals("")) {
             double txB = Double.parseDouble(this.tfBoeuf.getText()) / 100;
             double txV = Double.parseDouble(this.tfVege.getText()) / 100;
-            if (txB < 0 || txB > 1 || txV < 0 || txV > 1) {
+            if (txB < 0 || txB > 1 || txV < 0 || txV > 1 || 1 - txB - txV < 0) {
                 this.tfBoeuf.setText("");
                 this.tfVege.setText("");
                 JOptionPane.showMessageDialog(this, "Erreur de saisi, le taux doit etre inclus dand [0,1].");
@@ -88,7 +88,6 @@ public class PanneauSaisiAlimentation extends JPanel implements ActionListener {
                 this.removeAll();
                 this.repaint();
                 this.controleur.terminerAlimentation();
-                this.controleur.afficheResultat();
                 JLabel tl = new JLabel("Vous avez terminé cette étape !");
                 tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                 tl.setForeground(Color.white);
@@ -96,6 +95,7 @@ public class PanneauSaisiAlimentation extends JPanel implements ActionListener {
                 this.gbc.gridy = 0;
                 this.add(tl,this.gbc);
                 this.repaint();
+                this.controleur.afficheResultat();
             }
         }
         else {

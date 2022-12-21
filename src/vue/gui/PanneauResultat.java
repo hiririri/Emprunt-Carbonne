@@ -32,6 +32,6 @@ public class PanneauResultat extends JPanel {
     }
 
     public void setResultatPane(double res) {
-        this.lblData.setText(String.format("%.2f", res/1000));
+        this.lblData.setText(String.format("%.2f", res));
     }
 }

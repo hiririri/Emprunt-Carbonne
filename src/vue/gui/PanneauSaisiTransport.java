@@ -118,7 +118,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                 }
                 // Ne possede pas de voiture
                 else {
-                    this.controleur.addVoiture(this.controleur.getTransport(false));
+                    this.controleur.addVoiture(this.controleur.getTransport());
                     this.removeAll();
                     this.controleur.terminerTransport();
                     this.controleur.afficheResultat();
@@ -177,7 +177,6 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                 if (estCompleter) {
                     this.remove(this.btn);
                     this.controleur.terminerTransport();
-                    this.controleur.afficheResultat();
                     JLabel tl = new JLabel("Vous avez terminé cette étape !");
                     tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
                     tl.setForeground(Color.white);
@@ -185,6 +184,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                     this.gbc.gridy = 0;
                     this.add(tl,this.gbc);
                     this.repaint();
+                    this.controleur.afficheResultat();
                 }
                 else
                     JOptionPane.showMessageDialog(this, "Veuillez completer toutes les informations !");

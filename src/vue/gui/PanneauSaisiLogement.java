@@ -142,12 +142,11 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                     }
                     if (!estCompleter)
                         break;
+                    this.controleur.addLogement(this.controleur.getLogement(superficie,niveauEnergie));
                 }
                 if (estCompleter) {
-                    this.controleur.addLogement(this.controleur.getLogement(superficie,niveauEnergie));
                     this.removeAll();
                     this.controleur.terminerLogement();
-                    this.controleur.afficheResultat();
                     JLabel tl = new JLabel("Vous avez terminé cette étape !");
                     tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
                     tl.setForeground(Color.white);
@@ -155,6 +154,7 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                     this.gbc.gridy = 0;
                     this.add(tl,this.gbc);
                     this.repaint();
+                    this.controleur.afficheResultat();
                 }
                 else
                     JOptionPane.showMessageDialog(this, "Veuillez completer toutes les informations !");
