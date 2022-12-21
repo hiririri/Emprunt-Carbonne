@@ -23,6 +23,8 @@ public class MenuPrincipal {
         System.out.println("\033[1;92m1\033[m. Interface console.");
         System.out.println("\033[1;92m2\033[m. Interface graphique.");
         System.out.println("\033[1;92m3\033[m. Charger un utilisateur a partir d'un ficher.");
+        System.out.println("\033[1;92m4\033[m. Tester la classe ServicePublics. (Cette option entrainera la fermeture du programme.)");
+        System.out.println("\033[1;92m5\033[m. Tester la classe Transport. (Cette option entrainera la fermeture du programme.)");
         System.out.println("\033[1;92m0\033[m. Quitter");
         System.out.print("Veuillez choisir un numero : ");
     }
@@ -34,7 +36,7 @@ public class MenuPrincipal {
 
         switch (etat) {
             case 0 -> {
-                while (!MyExceptions.verifierSaisiEtatMenu(car,'0','3'))
+                while (!MyExceptions.verifierSaisiEtatMenu(car,'0','5'))
                     car = sc.next().charAt(0);
             }
             case 1 -> {
@@ -97,7 +99,7 @@ public class MenuPrincipal {
                     System.out.println("+---------------------------------------------------------------------+");
                     System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
                     System.out.println("+---------------------------------------------------------------------+");
-                    System.out.println(String.format("Mon Empreinte Carbonne : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
+                    System.out.println(String.format("Mon Empreinte Carbonne : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
                     this.controleur.detaillerResultat();
                     this.controleur.reconmmander();
                     this.controleur.retourner();
@@ -159,20 +161,23 @@ public class MenuPrincipal {
         System.out.println("+---------------------------------------------------------------------+");
         Scanner sc = new Scanner(System.in);
         String repTxB = null, repTxV = null;
-        int txB, txV;
-        System.out.print("Veuillez saisir le taux du beouf annuel (%)(Appuyer '\033[1;92mR\033[m' pour retourner) : ");
-        repTxB = sc.next();
-        repTxB = this.verifierTaux(repTxB,sc);
-        if (repTxB.equals("R"))
-            return false;
-        txB = Integer.parseInt(repTxB);
-        System.out.print("Veuillez saisir le taux du vegetarien annuel (%)(Appuyer '\033[1;92mR\033[m' pour retourner) : ");
-        repTxV = sc.next();
-        repTxV = this.verifierTaux(repTxV,sc);
-        if (repTxV.equals("R"))
-            return false;
-        txV = Integer.parseInt(repTxV);
-        this.controleur.setAlimentation(txB,txV);
+        double txB, txV;
+        do {
+            System.out.print("Veuillez saisir le taux du beouf annuel (%)(Appuyer '\033[1;92mR\033[m' pour retourner) : ");
+            repTxB = sc.next();
+            repTxB = this.verifierTaux(repTxB,sc);
+            if (repTxB.equals("R"))
+                return false;
+            txB = Double.parseDouble(repTxB);
+            System.out.print("Veuillez saisir le taux du vegetarien annuel (%)(Appuyer '\033[1;92mR\033[m' pour retourner) : ");
+            repTxV = sc.next();
+            repTxV = this.verifierTaux(repTxV,sc);
+            if (repTxV.equals("R"))
+                return false;
+            txV = Double.parseDouble(repTxV);
+        } while (!MyExceptions.verifierSaisiInfo(txB/100,txV/100));
+
+        this.controleur.setAlimentation(txB/100,txV/100);
 
         return true;
     }
@@ -231,7 +236,7 @@ public class MenuPrincipal {
         if (repNbVoiture == 'R')
             return false;
         if (repNbVoiture == '0')
-            this.controleur.addVoiture(this.controleur.getTransport(false));
+            this.controleur.addVoiture(this.controleur.getTransport());
         else {
             for (int i = 0; i < (int)repNbVoiture - 48; i++) {
                 System.out.print("Format : (Taille)(P/G),(Kilometre)(9 chiffres max),(Annee d'armotissement)(3 chiffres max)\n" +
@@ -284,7 +289,7 @@ public class MenuPrincipal {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
         System.out.println("+---------------------------------------------------------------------+");
-        System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
+        System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
         utilisateur.detaillerEmpreinte();
         utilisateur.recommender();
         this.controleur.retourner();

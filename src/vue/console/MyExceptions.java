@@ -50,4 +50,16 @@ public class MyExceptions extends Exception{
 
         return true;
     }
+
+    public static boolean verifierSaisiInfo(double txB, double txV) {
+        try {
+            if (1 - txB - txV < 0)
+                throw new MyExceptions("\033[1;93mTaux du beouf + Taux du vege DOIT ETRE INFERIEURE A 1\033[m!");
+        } catch (MyExceptions e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
 }
