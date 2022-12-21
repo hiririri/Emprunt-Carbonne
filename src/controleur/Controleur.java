@@ -1,8 +1,10 @@
 package controleur;
 
 import model.consoCarbone.Logement;
+import model.consoCarbone.ServicePublics;
 import model.consoCarbone.Transport;
 import model.utilisateur.Utilisateur;
+import org.junit.runner.JUnitCore;
 import vue.console.MenuPrincipal;
 import vue.gui.FramePrincipal;
 
@@ -27,8 +29,18 @@ public class Controleur {
             case '1' -> this.menu.frameCUI();
             case '2' -> this.frame = new FramePrincipal(this);
             case '3' -> this.menu.chargerUtilisateur();
+            case '4' -> this.testClassServicePublics();
+            case '5' -> this.testClassTransport();
             default  -> System.exit(0);
         }
+    }
+
+    private void testClassTransport() {
+        JUnitCore.main("model.test.TransportTest");
+    }
+
+    public void testClassServicePublics() {
+        JUnitCore.main("model.test.ServicePublicsTest");
     }
 
     public void chargerUtilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie, char taille, int kilomettre, int amortissement) {
@@ -38,6 +50,8 @@ public class Controleur {
     }
 
     public void retourner() {
+        this.utilisateur = new Utilisateur();
+        this.utilisateur.setServices(ServicePublics.instance);
         this.lancer();
     }
 
@@ -45,8 +59,8 @@ public class Controleur {
         return this.utilisateur.getTransport(taille,kilomettre,amortissement);
     }
 
-    public Transport getTransport(boolean possede) {
-        return this.utilisateur.getTransport(possede);
+    public Transport getTransport() {
+        return this.utilisateur.getTransport();
     }
 
     public Logement getLogement(int superficie, char niveauEnergie) {
@@ -114,6 +128,7 @@ public class Controleur {
     }
 
     public static void main(String[] args) {
+
         new Controleur();
     }
 }
