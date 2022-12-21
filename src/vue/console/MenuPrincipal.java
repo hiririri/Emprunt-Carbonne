@@ -1,7 +1,6 @@
 package vue.console;
 
 import controleur.Controleur;
-import model.consoCarbone.*;
 import model.utilisateur.Utilisateur;
 
 import java.io.*;
@@ -124,6 +123,7 @@ public class MenuPrincipal {
     }
 
     private void afficherMenu() {
+        System.out.println("+---------------------------------------------------------------------+");
         for (int i = 0; i < menu.size()-1; i++)
             System.out.println(menu.get(i));
         System.out.print(menu.get(menu.size()-1));
@@ -204,7 +204,7 @@ public class MenuPrincipal {
         if (repNbLogement == 'R')
             return false;
         if (repNbLogement == '0')
-            this.controleur.addLogement(new Logement(0, CE.A));
+            this.controleur.addLogement(this.controleur.getLogement(0,'A'));
         else {
             for (int i = 0; i < (int)repNbLogement - 48; i++) {
                 System.out.print("Format : (Superficie)(6 chiffres max),(Niveau energie)(A-G)\n" +
@@ -218,16 +218,7 @@ public class MenuPrincipal {
                     str = sc.next();
                 }
                 String[] tabInfo = str.split(",");
-                Logement l = new Logement();
-                l.setSuperficie(Integer.parseInt(tabInfo[0]));
-                if (tabInfo[1].equals("A")) l.setCe(CE.A);
-                if (tabInfo[1].equals("B")) l.setCe(CE.B);
-                if (tabInfo[1].equals("C")) l.setCe(CE.C);
-                if (tabInfo[1].equals("D")) l.setCe(CE.D);
-                if (tabInfo[1].equals("E")) l.setCe(CE.E);
-                if (tabInfo[1].equals("F")) l.setCe(CE.F);
-                if (tabInfo[1].equals("G")) l.setCe(CE.G);
-                this.controleur.addLogement(l);
+                this.controleur.addLogement(this.controleur.getLogement(Integer.parseInt(tabInfo[0]),tabInfo[1].charAt(0)));
             }
         }
 
@@ -242,7 +233,7 @@ public class MenuPrincipal {
         if (repNbVoiture == 'R')
             return false;
         if (repNbVoiture == '0')
-            this.controleur.addVoiture(new Transport(false));
+            this.controleur.addVoiture(this.controleur.getTransport(false));
         else {
             for (int i = 0; i < (int)repNbVoiture - 48; i++) {
                 System.out.print("Format : (Taille)(P/G),(Kilometre)(9 chiffres max),(Annee d'armotissement)(3 chiffres max)\n" +
@@ -256,12 +247,9 @@ public class MenuPrincipal {
                     str = sc.next();
                 }
                 String[] tabInfo = str.split(",");
-                this.controleur.addVoiture(new Transport(
-                        ((tabInfo[0].equals("P"))?Taille.P:Taille.G),
-                        Integer.parseInt(tabInfo[1]),
-                        Integer.parseInt(tabInfo[2])
-                        )
-                );
+                this.controleur.addVoiture(this.controleur.getTransport(tabInfo[0].charAt(0),
+                                                                        Integer.parseInt(tabInfo[1]),
+                                                                        Integer.parseInt(tabInfo[2])));
             }
         }
 
