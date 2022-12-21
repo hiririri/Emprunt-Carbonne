@@ -2,7 +2,9 @@ package vue.console;
 
 import controleur.Controleur;
 import model.consoCarbone.*;
+import model.utilisateur.Utilisateur;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,6 +21,7 @@ public class MenuPrincipal {
     public void choisirInterface() {
         System.out.println("1. Interface console.");
         System.out.println("2. Interface graphique.");
+        System.out.println("3. Charger un utilisateur a partir d'un ficher.");
         System.out.println("0. Quitter");
         System.out.print("Veuillez choisir un numero : ");
     }
@@ -33,8 +36,8 @@ public class MenuPrincipal {
                 System.out.print("Saisir DOIT ETRE UN NUMERO. Veuillez resaisir votre action : ");
                 car = sc.next().charAt(0);
             }
-            while (car < '0' || car > '2') {
-                System.out.print("Saisir DOIT ETRE INCLUS DANS [0,2]. Veuillez resaisir votre action : ");
+            while (car < '0' || car > '3') {
+                System.out.print("Saisir DOIT ETRE INCLUS DANS [0,3]. Veuillez resaisir votre action : ");
                 car = sc.next().charAt(0);
             }
         }
@@ -252,5 +255,39 @@ public class MenuPrincipal {
         }
 
         return true;
+    }
+
+    public void chargerUtilisateur() {
+        try {
+            File file = new File("./src/data.txt");
+            InputStreamReader read = null;
+            if (file.isFile() && file.exists()) {
+                read = new InputStreamReader(new FileInputStream(file), "UTF-8");
+                BufferedReader bufferedReader = new BufferedReader(read);
+                String lineTxt = "";
+                while ((lineTxt = bufferedReader.readLine()) != null) {
+                    String[] tabInfo = lineTxt.split(" ");
+                    this.controleur.chargerUtilisateur(
+                            Double.parseDouble(tabInfo[0]),
+                            Double.parseDouble(tabInfo[1]),
+                            Integer.parseInt(tabInfo[2]),
+                            Integer.parseInt(tabInfo[3]),
+                            tabInfo[4].charAt(0),
+                            tabInfo[5].charAt(0),
+                            Integer.parseInt(tabInfo[6]),
+                            Integer.parseInt(tabInfo[7]));
+                }
+            }
+            read.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void afficherNouvelUtilisateur(Utilisateur utilisateur) {
+        System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
+        utilisateur.detaillerEmpreinte();
+        utilisateur.recommender();
+        this.controleur.retourner();
     }
 }
