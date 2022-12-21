@@ -27,7 +27,7 @@ public class Controleur {
             case '1' -> this.menu.frameCUI();
             case '2' -> this.frame = new FramePrincipal(this);
             case '3' -> this.menu.chargerUtilisateur();
-            default -> System.exit(0);
+            default  -> System.exit(0);
         }
     }
 

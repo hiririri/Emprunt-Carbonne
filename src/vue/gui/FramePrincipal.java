@@ -5,6 +5,8 @@ import controleur.Controleur;
 import javax.swing.*;
 import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class FramePrincipal extends JFrame {
     private PanneauResultat panneauResultat;
@@ -44,6 +46,14 @@ public class FramePrincipal extends JFrame {
         this.add(this.panneauSecteur,  BorderLayout.SOUTH);
         this.add(this.panneauSaisi,    BorderLayout.CENTER);
         this.setVisible(true);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                FramePrincipal.this.setVisible(false);
+                FramePrincipal.this.controleur.retourner();
+            }
+        });
     }
 
     public void majPanneau(String secteur, Color color) {
