@@ -80,6 +80,7 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                         j2.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                         j2.setForeground(Color.white);
                         JComboBox ceLog = new JComboBox(new String[]{"A","B","C","D","E","F","G"});
+                        ceLog.setSelectedIndex(0);
 
                         panel.add(l1);
                         panel.add(j1);
@@ -114,10 +115,19 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
             else {
                 int superficie = 0;
                 char niveauEnergie = 0;
+                boolean estCompleter = false;
                 for (JPanel panel : lst) {
                     for (Component component : panel.getComponents()) {
-                        if (component instanceof JTextField)
-                            superficie = Integer.parseInt(((JTextField) component).getText());
+                        if (component instanceof JTextField) {
+                            if (!((JTextField) component).getText().equals("")) {
+                                superficie = Integer.parseInt(((JTextField) component).getText());
+                                estCompleter = true;
+                            }
+                            else {
+                                estCompleter = false;
+                                break;
+                            }
+                        }
                         if (component instanceof JComboBox<?>) {
                             if (((JComboBox<?>) component).getSelectedItem() != null) {
                                 if (((JComboBox<?>) component).getSelectedItem().equals("A")) niveauEnergie = 'A';
@@ -130,18 +140,24 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                             }
                         }
                     }
+                    if (!estCompleter)
+                        break;
                 }
-                this.controleur.addLogement(this.controleur.getLogement(superficie,niveauEnergie));
-                this.removeAll();
-                this.controleur.terminerLogement();
-                this.controleur.afficheResultat();
-                JLabel tl = new JLabel("Vous avez terminé cette étape !");
-                tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
-                tl.setForeground(Color.white);
-                this.gbc.gridx = 0;
-                this.gbc.gridy = 0;
-                this.add(tl,this.gbc);
-                this.repaint();
+                if (estCompleter) {
+                    this.controleur.addLogement(this.controleur.getLogement(superficie,niveauEnergie));
+                    this.removeAll();
+                    this.controleur.terminerLogement();
+                    this.controleur.afficheResultat();
+                    JLabel tl = new JLabel("Vous avez terminé cette étape !");
+                    tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
+                    tl.setForeground(Color.white);
+                    this.gbc.gridx = 0;
+                    this.gbc.gridy = 0;
+                    this.add(tl,this.gbc);
+                    this.repaint();
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Veuillez completer toutes les informations !");
             }
         }
     }

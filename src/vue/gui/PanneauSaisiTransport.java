@@ -80,6 +80,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                         ButtonGroup bg = new ButtonGroup();
                         JRadioButton r1 = new JRadioButton("P ");
                         JRadioButton r2 = new JRadioButton("G ");
+                        r1.setSelected(true);
                         r1.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                         r1.setForeground(Color.white);
                         r2.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
@@ -131,6 +132,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                 }
             }
             else {
+                boolean estCompleter = false;
                 for (JPanel panel : lst) {
                     char taille = 0;
                     int kilomettre = 0, amortissement = 1;
@@ -142,28 +144,50 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                                 taille = ((JRadioButton) component).getText().charAt(0);
                         }
                         if (component instanceof JTextField) {
-                            if (((JTextField) component).equals(panel.getComponent(3))) {
-                                kilomettre = Integer.parseInt(((JTextField) component).getText());
+                            if (((JTextField) component).getText().equals("")) {
+                                estCompleter = false;
+                                break;
                             }
-                            if (((JTextField) component).equals(panel.getComponent(5))) {
-                                amortissement = Integer.parseInt(((JTextField) component).getText());
+                            else {
+                                if (((JTextField) component).equals(panel.getComponent(3))) {
+                                    kilomettre = Integer.parseInt(((JTextField) component).getText());
+                                    estCompleter = true;
+                                }
+                            }
+                            if (((JTextField) component).getText().equals("")) {
+                                estCompleter = false;
+                                break;
+                            }
+                            else {
+                                if (((JTextField) component).equals(panel.getComponent(5))) {
+                                    amortissement = Integer.parseInt(((JTextField) component).getText());
+                                    estCompleter = true;
+                                }
                             }
                         }
                     }
-                    this.controleur.addVoiture(this.controleur.getTransport(taille,kilomettre,amortissement));
-                    this.controleur.calculerImpact();
-                    this.remove(panel);
+                    if (estCompleter) {
+                        this.controleur.addVoiture(this.controleur.getTransport(taille,kilomettre,amortissement));
+                        this.controleur.calculerImpact();
+                        this.remove(panel);
+                    }
+                    else
+                        break;
                 }
-                this.remove(this.btn);
-                this.controleur.terminerTransport();
-                this.controleur.afficheResultat();
-                JLabel tl = new JLabel("Vous avez terminé cette étape !");
-                tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
-                tl.setForeground(Color.white);
-                this.gbc.gridx = 0;
-                this.gbc.gridy = 0;
-                this.add(tl,this.gbc);
-                this.repaint();
+                if (estCompleter) {
+                    this.remove(this.btn);
+                    this.controleur.terminerTransport();
+                    this.controleur.afficheResultat();
+                    JLabel tl = new JLabel("Vous avez terminé cette étape !");
+                    tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
+                    tl.setForeground(Color.white);
+                    this.gbc.gridx = 0;
+                    this.gbc.gridy = 0;
+                    this.add(tl,this.gbc);
+                    this.repaint();
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "Veuillez completer toutes les informations !");
             }
         }
     }
