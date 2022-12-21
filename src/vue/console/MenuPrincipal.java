@@ -19,6 +19,7 @@ public class MenuPrincipal {
     }
 
     public void choisirInterface() {
+        System.out.println("+---------------------------------------------------------------------+");
         System.out.println("1. Interface console.");
         System.out.println("2. Interface graphique.");
         System.out.println("3. Charger un utilisateur a partir d'un ficher.");
@@ -73,15 +74,14 @@ public class MenuPrincipal {
 
     public void frameCUI() {
         menu = new ArrayList<>();
+        System.out.println("+---------------------------------------------------------------------+");
         menu.add("1. Calculer l'empreinte carbon dans Transport");
         menu.add("2. Calculer l'empreinte carbon dans Logement");
         menu.add("3. Calculer l'empreinte carbon dans Alimentation");
         menu.add("4. Calculer l'empreinte carbon dans Bien Consommation");
         menu.add("0. Retourner");
         menu.add("Veuillez choisir un numero : ");
-        for (int i = 0; i < menu.size()-1; i++)
-            System.out.println(menu.get(i));
-        System.out.print(menu.get(menu.size()-1));
+        this.afficherMenu();
 
         char action = this.getAction(1);
 
@@ -111,15 +111,22 @@ public class MenuPrincipal {
                 }
 
                 if (menu.size() == 2) {
+                    System.out.println("+---------------------------------------------------------------------+");
                     System.out.println(String.format("Mon Empreinte Carbonne : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
                     this.controleur.detaillerResultat();
                     this.controleur.reconmmander();
                     System.exit(0);
                 }
             }
-            menu.forEach(System.out::println);
+            this.afficherMenu();
             action = this.getAction(1);
         }
+    }
+
+    private void afficherMenu() {
+        for (int i = 0; i < menu.size()-1; i++)
+            System.out.println(menu.get(i));
+        System.out.print(menu.get(menu.size()-1));
     }
 
     private List<String> majMenu(String secteur, List<String> menu) {
@@ -200,11 +207,13 @@ public class MenuPrincipal {
             this.controleur.addLogement(new Logement(0, CE.A));
         else {
             for (int i = 0; i < (int)repNbLogement - 48; i++) {
-                System.out.print("Format : (Superficie (6 chiffres max)),(Niveau energie (A-G))\n" +
+                System.out.print("Format : (Superficie)(6 chiffres max),(Niveau energie)(A-G)\n" +
+                                 "Exemple : 50,A\n" +
                                  "Veuillez saisir les information de votre logement N° " + (i+1) + " : ");
                 String str = sc.next();
                 while (!Pattern.matches("^\\d{0,6},[A-G]$", str)) {
                     System.out.print("Format : (Superficie (6 chiffres max)),(Niveau energie (A-G))\n" +
+                                     "Exemple : 50,A\n" +
                                      "Saisir DOIT ETRE EN FORMAT. Veuillez resaisir l'ensemble d'informations : ");
                     str = sc.next();
                 }
@@ -236,11 +245,13 @@ public class MenuPrincipal {
             this.controleur.addVoiture(new Transport(false));
         else {
             for (int i = 0; i < (int)repNbVoiture - 48; i++) {
-                System.out.print("Format : (Taille (P/G)),(Kilometre (7 chiffres max)),(Annee d'armotissement (3 chiffres max))\n" +
+                System.out.print("Format : (Taille)(P/G),(Kilometre)(9 chiffres max),(Annee d'armotissement)(3 chiffres max)\n" +
+                                 "Exemple : P,100000,6\n" +
                                  "Veuillez saisir les information de votre voitrue N° " + (i+1) + " : ");
                 String str = sc.next();
-                while (!Pattern.matches("^[P|G],\\d{0,7},\\d{0,3}$", str)) {
+                while (!Pattern.matches("^[P|G],\\d{0,9},\\d{0,3}$", str)) {
                     System.out.print("Format : (Taille (P/G)),(Kilometre),(Annee d'armotissement)\n" +
+                                     "Exemple : P,100000,6\n" +
                                      "Saisir DOIT ETRE EN FORMAT. Veuillez resaisir l'ensemble d'informations : ");
                     str = sc.next();
                 }
@@ -285,6 +296,7 @@ public class MenuPrincipal {
     }
 
     public void afficherNouvelUtilisateur(Utilisateur utilisateur) {
+        System.out.println("+---------------------------------------------------------------------+");
         System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
         utilisateur.detaillerEmpreinte();
         utilisateur.recommender();
