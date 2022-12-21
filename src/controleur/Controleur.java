@@ -38,7 +38,6 @@ public class Controleur {
     }
 
     public void retourner() {
-        this.menu = new MenuPrincipal(this);
         this.lancer();
     }
 
