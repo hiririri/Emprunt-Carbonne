@@ -1,5 +1,7 @@
 package model.consoCarbone;
 
+import model.utilisateur.Utilisateur;
+
 /**
  * This is a class simulates carbon consume of public service.
  */
@@ -36,7 +38,7 @@ public class ServicePublics extends ConsoCarbone {
      */
     @Override
     public void calculImpact() {
-        this.impact = 1.5 * 1750;
+        this.impact = 1.5;
     }
 
     /**

@@ -26,17 +26,13 @@ public class Transport extends ConsoCarbone{
         this.calculImpact();
     }
 
-    public Transport(boolean possede) {
+    public Transport() {
         super();
 
         this.impact = 0;
         this.taille = Taille.G;
         this.kilomAnnee = 0;
         this.amortissement = 1;
-    }
-
-    public Transport() {
-        this(false);
     }
 
     /**
@@ -108,7 +104,7 @@ public class Transport extends ConsoCarbone{
      */
     @Override
     public void calculImpact() {
-            this.impact = this.kilomAnnee * 1.93 * Math.pow(10,-4) + this.taille.emet / this.amortissement;
+        this.impact = this.possede ? this.kilomAnnee * 1.93 * Math.pow(10,-4) + this.taille.emet / this.amortissement : 0;
     }
 
     /**

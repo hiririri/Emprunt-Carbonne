@@ -7,6 +7,6 @@ public enum Taille {
     public double emet;
 
     private Taille(double coeff) {
-        this.emet = coeff * 1750;
+        this.emet = coeff;
     }
 }
