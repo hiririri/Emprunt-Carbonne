@@ -11,7 +11,7 @@ import org.junit.After;
 * Transport Tester. 
 * 
 * @author <Authors name>
-* @since <pre>12ÔÂ 20, 2022</pre> 
+* @since <pre>20/12/2022</pre>
 * @version 1.0 
 */ 
 public class TransportTest {
@@ -33,7 +33,7 @@ public class TransportTest {
     *
     */
     @Test
-    public void testIsPossede() throws Exception {
+    public void isPossede_testPossedeIsFalseDefault_returnsFalse() throws Exception {
         //TODO: Test goes here...
         Assert.assertFalse(test.isPossede());
     }
@@ -44,9 +44,10 @@ public class TransportTest {
     *
     */
     @Test
-    public void testSetPossede() throws Exception {
+    public void setPossede_testSetPossedeFunction_possedeWillBeTrueAfter() throws Exception {
         //TODO: Test goes here...
         test.setPossede(true);
+        Assert.assertTrue(test.isPossede());
     }
 
     /**
@@ -55,7 +56,7 @@ public class TransportTest {
     *
     */
     @Test
-    public void testGetTaille() throws Exception {
+    public void getTaille_testGetTailleFunction_returnsDefaultCarSizeOfObjectTransport() throws Exception {
         //TODO: Test goes here...
         Assert.assertEquals(Taille.G, test.getTaille());
     }
@@ -66,9 +67,10 @@ public class TransportTest {
     *
     */
     @Test
-    public void testSetTaille() throws Exception {
+    public void setTaille_testSetTailleFunction_resetCarSizeIntoSmall() throws Exception {
         //TODO: Test goes here...
         test.setTaille(Taille.P);
+        Assert.assertEquals(Taille.P, test.getTaille());
     }
 
     /**
@@ -77,7 +79,7 @@ public class TransportTest {
     *
     */
     @Test
-    public void testGetKilomAnnee() throws Exception {
+    public void getKilomAnnee_testGetKilomAnneeFunction_returnsDefaultKilometerOfObjectTransport() throws Exception {
         //TODO: Test goes here...
         Assert.assertEquals(0,test.getKilomAnnee());
     }
@@ -88,9 +90,10 @@ public class TransportTest {
     *
     */
     @Test
-    public void testSetKilomAnnee() throws Exception {
+    public void setKilomAnnee_testSetKilomAnneeFunction_resetKilometerOfObjectTransportInto1000() throws Exception {
         //TODO: Test goes here...
         test.setKilomAnnee(1000);
+        Assert.assertEquals(1000,test.getKilomAnnee());
     }
 
     /**
@@ -99,7 +102,7 @@ public class TransportTest {
     *
     */
     @Test
-    public void testGetAmortissement() throws Exception {
+    public void getAmortissement_testGetAmortissementFunction_returnsDefaultAmortissementOfObjectTransport() throws Exception {
         //TODO: Test goes here...
         Assert.assertEquals(1,test.getAmortissement());
     }
@@ -110,20 +113,10 @@ public class TransportTest {
     *
     */
     @Test
-    public void testSetAmortissement() throws Exception {
+    public void setAmortissement_testSetAmortissementFunction_resetAmortissementOfObjectTransportInto6() throws Exception {
         //TODO: Test goes here...
         test.setAmortissement(6);
-    }
-
-    /**
-    *
-    * Method: calculImpact()
-    *
-    */
-    @Test
-    public void testCalculImpact() throws Exception {
-        //TODO: Test goes here...
-        test.calculImpact();
+        Assert.assertEquals(6,test.getAmortissement());
     }
 
     /**
@@ -132,8 +125,9 @@ public class TransportTest {
      *
      */
     @Test
-    public void testGetImpact() throws Exception {
+    public void calculImpact_testCalculImpactFunction_returnsNewImpactAfterCalculate() throws Exception {
         //TODO: Test goes here...
-        Assert.assertEquals(1225.19,test.getImpact(), 1225.19);
+        this.test.calculImpact();
+        Assert.assertNotEquals(0,test.getImpact(), 0);
     }
 } 

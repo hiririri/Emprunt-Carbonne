@@ -10,7 +10,7 @@ import org.junit.After;
 * ServicePublics Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>12ÔÂ 20, 2022</pre> 
+* @since <pre>20/12/2022</pre>
 * @version 1.0 
 */ 
 public class ServicePublicsTest {
@@ -32,8 +32,8 @@ public class ServicePublicsTest {
     *
     */
     @Test
-    public void testCreatServicePublics() throws Exception {
+    public void CreatServicePublics_createNewServicePublics_returnsNullObject() throws Exception {
         //TODO: Test goes here...
-        Assert.assertNull(ServicePublics.creatServicePublics());
+        Assert.assertNull(test);
     }
 } 
