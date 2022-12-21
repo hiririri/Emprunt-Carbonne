@@ -19,6 +19,8 @@ public class MenuPrincipal {
 
     public void choisirInterface() {
         System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                          * Menu Principal *                         |");
+        System.out.println("+---------------------------------------------------------------------+");
         System.out.println("1. Interface console.");
         System.out.println("2. Interface graphique.");
         System.out.println("3. Charger un utilisateur a partir d'un ficher.");
@@ -73,7 +75,6 @@ public class MenuPrincipal {
 
     public void frameCUI() {
         menu = new ArrayList<>();
-        System.out.println("+---------------------------------------------------------------------+");
         menu.add("1. Calculer l'empreinte carbon dans Transport");
         menu.add("2. Calculer l'empreinte carbon dans Logement");
         menu.add("3. Calculer l'empreinte carbon dans Alimentation");
@@ -111,18 +112,25 @@ public class MenuPrincipal {
 
                 if (menu.size() == 2) {
                     System.out.println("+---------------------------------------------------------------------+");
+                    System.out.println("|                          * Résultat *                               |");
+                    System.out.println("+---------------------------------------------------------------------+");
                     System.out.println(String.format("Mon Empreinte Carbonne : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
                     this.controleur.detaillerResultat();
                     this.controleur.reconmmander();
-                    System.exit(0);
+                    this.controleur.retourner();
+                    break;
                 }
             }
+            if (menu.size() == 2)
+                break;
             this.afficherMenu();
             action = this.getAction(1);
         }
     }
 
     private void afficherMenu() {
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                          * Menu Saisi *                             |");
         System.out.println("+---------------------------------------------------------------------+");
         for (int i = 0; i < menu.size()-1; i++)
             System.out.println(menu.get(i));
@@ -284,6 +292,8 @@ public class MenuPrincipal {
     }
 
     public void afficherNouvelUtilisateur(Utilisateur utilisateur) {
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                          * Résultat *                               |");
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()/1000));
         utilisateur.detaillerEmpreinte();
