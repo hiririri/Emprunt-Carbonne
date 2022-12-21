@@ -2,7 +2,6 @@ package model.utilisateur;
 
 import model.consoCarbone.*;
 
-import javax.swing.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -121,11 +120,31 @@ public class Utilisateur {
 
     public void detaillerEmpreinte() {
         this.calculerImpact();
-        String dtl = String.format("%-17s : %.2f\n", "Alimentation"    , this.alimentation.getImpact()) +
-                     String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
-                     String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
-                     String.format("%-17s : %.2f\n", "Transport"       , this.getImpactTransports()   ) +
-                     String.format("%-17s : %.2f\n", "Services Publics", this.service     .getImpact());
+//        String dtl = String.format("%-17s : %.2f\n", "Alimentation"    , this.alimentation.getImpact()) +
+//                     String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
+//                     String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
+//                     String.format("%-17s : %.2f\n", "Transport"       , this.getImpactTransports()   ) +
+//                     String.format("%-17s : %.2f\n", "Services Publics", this.service     .getImpact());
+
+        String dtl = String.format("%-17s : %.2f tonnes CO2/an\n", "Alimentation"    , this.alimentation.getImpact()) +
+                     String.format("%-17s : %.2f tonnes CO2/an\n", "Bien Consomation", this.bienConso   .getImpact()) +
+                     String.format("%-17s : %.2f tonnes CO2/an\n", "Services Publics", this.service     .getImpact());
+
+        if (this.lstLogements.size() == 1)
+            dtl += String.format("%-17s : %.2f\n", "Logement", this.getImpactLogements());
+        else {
+            dtl += "Logements : \n";
+            for (int i = 0; i < this.lstLogements.size(); i++)
+                dtl += String.format("\tLogement N°%d : %.2f tonnes CO2/an\n", (i+1), this.lstLogements.get(i).getImpact());
+        }
+
+        if (this.lstVoitures.size() == 1)
+            dtl += String.format("%-17s : %.2f\n", "Transport", this.getImpactLogements());
+        else {
+            dtl += "Voitures : \n";
+            for (int i = 0; i < this.lstLogements.size(); i++)
+                dtl += String.format("\tVoirture N°%d : %.2f tonnes CO2/an\n", (i+1), this.lstVoitures.get(i).getImpact());
+        }
 
         System.out.println(dtl);
     }
@@ -151,7 +170,7 @@ public class Utilisateur {
         int[] counter = new int[1];
         String lstRanked = "";
         for (String key : map.keySet())
-            lstRanked += String.format("%d --> %s : %.2f\n", ++counter[0], key, map.get(key));
+            lstRanked += String.format("%d --> %s : %.2f tonnes CO2/an\n", ++counter[0], key, map.get(key));
         System.out.println(lstRanked);
 
         String consoMax = map.entrySet()
