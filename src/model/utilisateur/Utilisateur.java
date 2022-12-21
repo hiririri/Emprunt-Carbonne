@@ -53,8 +53,8 @@ public class Utilisateur {
         return null;
     }
 
-    public Transport getTransport(boolean possede) {
-        return new Transport(possede);
+    public Transport getTransport() {
+        return new Transport();
     }
 
     public void setAlimentation(double txB, double txV) {
@@ -105,7 +105,7 @@ public class Utilisateur {
 
         return this.alimentation.getImpact() +
                this.bienConso.   getImpact() +
-               this.service.    getImpact() +
+               this.service.     getImpact() +
                this.getImpactLogements() +
                this.getImpactTransports();
     }
@@ -120,18 +120,13 @@ public class Utilisateur {
 
     public void detaillerEmpreinte() {
         this.calculerImpact();
-//        String dtl = String.format("%-17s : %.2f\n", "Alimentation"    , this.alimentation.getImpact()) +
-//                     String.format("%-17s : %.2f\n", "Bien Consomation", this.bienConso   .getImpact()) +
-//                     String.format("%-17s : %.2f\n", "Logement"        , this.getImpactLogements()    ) +
-//                     String.format("%-17s : %.2f\n", "Transport"       , this.getImpactTransports()   ) +
-//                     String.format("%-17s : %.2f\n", "Services Publics", this.service     .getImpact());
 
         String dtl = String.format("%-17s : %.2f tonnes CO2/an\n", "Alimentation"    , this.alimentation.getImpact()) +
                      String.format("%-17s : %.2f tonnes CO2/an\n", "Bien Consomation", this.bienConso   .getImpact()) +
                      String.format("%-17s : %.2f tonnes CO2/an\n", "Services Publics", this.service     .getImpact());
 
         if (this.lstLogements.size() == 1)
-            dtl += String.format("%-17s : %.2f\n", "Logement", this.getImpactLogements());
+            dtl += String.format("%-17s : %.2f tonnes CO2/an\n", "Logement", this.lstLogements.get(0).getImpact());
         else {
             dtl += "Logements : \n";
             for (int i = 0; i < this.lstLogements.size(); i++)
@@ -139,10 +134,10 @@ public class Utilisateur {
         }
 
         if (this.lstVoitures.size() == 1)
-            dtl += String.format("%-17s : %.2f\n", "Transport", this.getImpactLogements());
+            dtl += String.format("%-17s : %.2f tonnes CO2/an\n", "Transport", this.lstVoitures.get(0).getImpact());
         else {
-            dtl += "Voitures : \n";
-            for (int i = 0; i < this.lstLogements.size(); i++)
+            dtl += "Transports : \n";
+            for (int i = 0; i < this.lstVoitures.size(); i++)
                 dtl += String.format("\tVoirture N°%d : %.2f tonnes CO2/an\n", (i+1), this.lstVoitures.get(i).getImpact());
         }
 
@@ -178,7 +173,7 @@ public class Utilisateur {
                 .max(Comparator.comparing(Map.Entry::getValue))
                 .stream()
                 .map(Map.Entry::getKey)
-                .toList()
+                .collect(Collectors.toList())
                 .get(0);
         System.out.println("Votre consommation dans le secteur '" + consoMax + "' est le plus eleve.\n" +
                            "Voici quelque reconmmandation qui pourrait utile pour vous.");
