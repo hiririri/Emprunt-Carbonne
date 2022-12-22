@@ -167,7 +167,7 @@ public class PanneauSaisi extends JPanel implements ActionListener {
         this.setEtat(true);
         this.lbl.setText(secteur);
         this.setBackground(color);
-        this.lblIcon.setIcon(new ImageIcon("./src/vue/gui/images/" + secteur + ".png"));
+        this.lblIcon.setIcon(new ImageIcon("./vue/gui/images/" + secteur + ".png"));
 
         this.psl = null;
         this.pst = null;
