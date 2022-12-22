@@ -32,6 +32,9 @@ public class FramePrincipal extends JFrame {
      */
     private PanneauSaisi    panneauSaisi;
 
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
     /**

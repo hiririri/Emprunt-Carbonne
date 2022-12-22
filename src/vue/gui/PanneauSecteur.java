@@ -54,11 +54,11 @@ public class PanneauSecteur extends JPanel implements ActionListener {
     public PanneauSecteur(Controleur controleur) {
         this.controleur = controleur;
 
-        this.btnAvion        = new JButton(new ImageIcon("./src/vue/gui/images/Avion_p.png"));
-        this.btnTransport    = new JButton(new ImageIcon("./src/vue/gui/images/Voiture_p.png"));
-        this.btnAlimentaiton = new JButton(new ImageIcon("./src/vue/gui/images/Alimentation_p.png"));
-        this.btnBienConso    = new JButton(new ImageIcon("./src/vue/gui/images/BienConso_p.png"));
-        this.btnLogement     = new JButton(new ImageIcon("./src/vue/gui/images/Logement_p.png"));
+        this.btnAvion        = new JButton(new ImageIcon("./vue/gui/images/Avion_p.png"));
+        this.btnTransport    = new JButton(new ImageIcon("./vue/gui/images/Voiture_p.png"));
+        this.btnAlimentaiton = new JButton(new ImageIcon("./vue/gui/images/Alimentation_p.png"));
+        this.btnBienConso    = new JButton(new ImageIcon("./vue/gui/images/BienConso_p.png"));
+        this.btnLogement     = new JButton(new ImageIcon("./vue/gui/images/Logement_p.png"));
 
         this.btnAvion.setBackground(new Color(89, 80, 133));
         this.btnTransport.setBackground(new Color(182, 21, 64));

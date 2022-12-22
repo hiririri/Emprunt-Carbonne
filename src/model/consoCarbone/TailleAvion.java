@@ -20,6 +20,11 @@ public enum TailleAvion {
      */
     public double emet;
 
+    /**
+     * Constructor of TailleAvion
+     *
+     * @param coeff coefficient
+     */
     private TailleAvion(double coeff) {
         this.emet = coeff;
     }

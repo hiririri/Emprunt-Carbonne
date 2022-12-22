@@ -14,6 +14,9 @@ import org.junit.After;
  * @since <pre>20/12/2022</pre>
  */
 public class ServicePublicsTest {
+    /**
+     * ServicePublics instance
+     */
     private ServicePublics test = null;
 
     /**
@@ -44,6 +47,7 @@ public class ServicePublicsTest {
     @Test
     public void CreatServicePublics_createNewServicePublics_returnsNullObject() throws Exception {
         //TODO: Test goes here...
-        Assert.assertNull(test);
+        ServicePublics sp = ServicePublics.creatServicePublics();
+        Assert.assertNotEquals(sp, test);
     }
 } 

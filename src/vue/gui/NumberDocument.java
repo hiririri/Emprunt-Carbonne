@@ -24,7 +24,7 @@ public class NumberDocument extends PlainDocument {
      * @param var1 var1
      * @param var2 var2
      * @param var3 var3
-     * @throws BadLocationException
+     * @throws BadLocationException bad location
      * @see PlainDocument
      */
     public void insertString(int var1, String var2, AttributeSet var3) throws BadLocationException {

@@ -95,7 +95,7 @@ public class PanneauSaisi extends JPanel implements ActionListener {
         this.gbc = new GridBagConstraints();
 
         this.lbl = new JLabel(this.secteur);
-        this.lblIcon = new JLabel(new ImageIcon("./src/vue/gui/images/" + this.secteur + ".png"));
+        this.lblIcon = new JLabel(new ImageIcon("./vue/gui/images/" + this.secteur + ".png"));
         this.btn = new JButton("Commencer");
 
         this.lbl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));

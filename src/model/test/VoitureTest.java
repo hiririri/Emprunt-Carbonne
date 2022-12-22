@@ -42,10 +42,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: isPossede()
-    *
-    */
+     *
+     * Method: isPossede()
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void isPossede_testPossedeIsFalseDefault_returnsFalse() throws Exception {
         //TODO: Test goes here...
@@ -53,10 +54,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: setPossede(boolean possede)
-    *
-    */
+     *
+     * Method: setPossede(boolean possede)
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void setPossede_testSetPossedeFunction_possedeWillBeTrueAfter() throws Exception {
         //TODO: Test goes here...
@@ -65,10 +67,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: getTaille()
-    *
-    */
+     *
+     * Method: getTaille()
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void getTaille_testGetTailleFunction_returnsDefaultCarSizeOfObjectTransport() throws Exception {
         //TODO: Test goes here...
@@ -76,10 +79,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: setTaille(Taille taille)
-    *
-    */
+     *
+     * Method: setTaille(Taille taille)
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void setTaille_testSetTailleFunction_resetCarSizeIntoSmall() throws Exception {
         //TODO: Test goes here...
@@ -88,10 +92,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: getKilomAnnee()
-    *
-    */
+     *
+     * Method: getKilomAnnee()
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void getKilomAnnee_testGetKilomAnneeFunction_returnsDefaultKilometerOfObjectTransport() throws Exception {
         //TODO: Test goes here...
@@ -99,10 +104,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: setKilomAnnee(int kilomAnnee)
-    *
-    */
+     *
+     * Method: setKilomAnnee(int kilomAnnee)
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void setKilomAnnee_testSetKilomAnneeFunction_resetKilometerOfObjectTransportInto1000() throws Exception {
         //TODO: Test goes here...
@@ -111,10 +117,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: getAmortissement()
-    *
-    */
+     *
+     * Method: getAmortissement()
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void getAmortissement_testGetAmortissementFunction_returnsDefaultAmortissementOfObjectTransport() throws Exception {
         //TODO: Test goes here...
@@ -122,10 +129,11 @@ public class VoitureTest {
     }
 
     /**
-    *
-    * Method: setAmortissement(int amortissement)
-    *
-    */
+     *
+     * Method: setAmortissement(int amortissement)
+     *
+     * @throws Exception the exception
+     */
     @Test
     public void setAmortissement_testSetAmortissementFunction_resetAmortissementOfObjectTransportInto6() throws Exception {
         //TODO: Test goes here...
@@ -137,6 +145,7 @@ public class VoitureTest {
      *
      * Method: getImpact()
      *
+     * @throws Exception the exception
      */
     @Test
     public void calculImpact_testCalculImpactFunction_returnsNewImpactAfterCalculate() throws Exception {

@@ -31,7 +31,6 @@ public class MyExceptions extends Exception{
      * @param debut the low
      * @param fin   the high
      * @return true if input is well-formed, else false
-     * @exception MyExceptions on input error.
      * @see MyExceptions
      */
     public static boolean verifierSaisiEtatMenu(char car, char debut, char fin){
@@ -57,7 +56,6 @@ public class MyExceptions extends Exception{
      * @param text the text
      * @param msg  the message
      * @return true if input is well-formed, else false
-     * @exception MyExceptions on input error.
      * @see MyExceptions
      */
     public static boolean verifierSaisiInfo(String reg, String text, String msg) {
@@ -80,7 +78,6 @@ public class MyExceptions extends Exception{
      * @param debut the low
      * @param fin   the high
      * @return true if input is well-formed, else false
-     * @exception MyExceptions on input error.
      * @see MyExceptions
      */
     public static boolean verifierSaisiInfo(String reg, String text, int debut, int fin) {
@@ -103,7 +100,6 @@ public class MyExceptions extends Exception{
      * @param txB the rate meet
      * @param txV the rate vegetable
      * @return true if input is well-formed, else false
-     * @exception MyExceptions on input error.
      * @see MyExceptions
      */
     public static boolean verifierSaisiInfo(double txB, double txV) {
@@ -131,7 +127,6 @@ public class MyExceptions extends Exception{
      * @param amortissement the car's year amortization
      * @param cpt           the counter
      * @return true if all the data is correct, else false
-     * @exception java.io.IOException on input error.
      * @see java.io.IOException
      */
     public static boolean verifierChargerUtilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie,

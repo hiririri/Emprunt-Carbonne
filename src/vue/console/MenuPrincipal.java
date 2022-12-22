@@ -16,7 +16,14 @@ import java.util.Scanner;
  * @version 3.2
  */
 public class MenuPrincipal {
+    /**
+     * List of menu
+     */
     private List<String> menu;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
     /**
@@ -362,7 +369,7 @@ public class MenuPrincipal {
      */
     public void chargerUtilisateur() {
         try {
-            File file = new File("./src/data.txt");
+            File file = new File("./data.txt");
             InputStreamReader read = null;
             if (file.isFile() && file.exists()) {
                 read = new InputStreamReader(new FileInputStream(file), "UTF-8");
