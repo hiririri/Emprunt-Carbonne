@@ -67,8 +67,5 @@ public class Logement extends ConsoCarbone {
                 "}", this.id, this.impact, this.ce.name(), this.ce.alpha, this.superficie);
     }
 
-    @Override
-    public int compareTo(ConsoCarbone o) {
-        return (int)(this.impact - o.impact);
-    }
+
 }

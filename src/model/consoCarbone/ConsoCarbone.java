@@ -42,6 +42,18 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
      *Calculating carbon emissions
      */
     public abstract void calculImpact();
+    /**
+     * Method used for comparing impact of Empreinte Carbonne of nutrition.
+     * @param o the object to be compared.
+     * @return -1 if this.impact is less than o.impact.
+     *         0 if it is equal.
+     *         1 if this.impact is bigger than the other.
+     */
+    @Override
+    public int compareTo(ConsoCarbone o) {
+        return (int)(this.impact - o.impact);
+    }
+
 
     /**
      * @return Returns a string containing the current member variable
