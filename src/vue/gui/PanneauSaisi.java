@@ -19,7 +19,7 @@ public class PanneauSaisi extends JPanel implements ActionListener {
     public PanneauSaisi(Controleur controleur) {
         this.controleur = controleur;
         this.secteur = "Avion";
-        this.color = new Color(182, 21, 64);
+        this.color = new Color(89, 80, 133);
 
         this.setLayout(new GridBagLayout());
         this.gbc = new GridBagConstraints();
