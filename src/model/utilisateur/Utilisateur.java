@@ -11,14 +11,14 @@ public class Utilisateur {
     private ServicePublics service;
 
     private List<Logement> lstLogements;
-    private List<Transport> lstVoitures;
+    private List<Transport> lstTransports;
 
     public Utilisateur() {
         this.alimentation = new Alimentation(0,0);
         this.bienConso = new BienConso(0);
         this.service = ServicePublics.creatServicePublics();
         this.lstLogements = new ArrayList<>();
-        this.lstVoitures  = new ArrayList<>();
+        this.lstTransports  = new ArrayList<>();
     }
 
     public Utilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie,
@@ -26,10 +26,10 @@ public class Utilisateur {
         this.alimentation = new Alimentation(txB,txV);
         this.bienConso = new BienConso(montant);
         this.lstLogements = new ArrayList<>();
-        this.lstVoitures  = new ArrayList<>();
+        this.lstTransports  = new ArrayList<>();
 
         this.lstLogements.add(this.getLogement(superficie, niveauEnergie));
-        this.lstVoitures.add(this.getTransport(taille,kilomettre,amortissement));
+        this.lstTransports.add(this.getVoiture(taille,kilomettre,amortissement));
     }
 
     public Logement getLogement(int superficie, char niveauEnergie) {
@@ -45,16 +45,28 @@ public class Utilisateur {
         return null;
     }
 
-    public Transport getTransport(char taille, int kilomettre, int amortissement) {
+    public Voiture getVoiture(char taille, int kilomettre, int amortissement) {
         switch (taille) {
-            case 'P' -> {return new Transport(Taille.P, kilomettre, amortissement);}
-            case 'G' -> {return new Transport(Taille.G, kilomettre, amortissement);}
+            case 'P' -> {return new Voiture(TailleVoiture.P, kilomettre, amortissement);}
+            case 'G' -> {return new Voiture(TailleVoiture.G, kilomettre, amortissement);}
         }
         return null;
     }
 
-    public Transport getTransport() {
-        return new Transport();
+    public Voiture getVoiture() {
+        return new Voiture();
+    }
+
+    public Avion getAvion(char taille, int kilomettre) {
+        switch (taille) {
+            case 'P' -> {return new Avion(TailleAvion.P, kilomettre);}
+            case 'G' -> {return new Avion(TailleAvion.G, kilomettre);}
+        }
+        return null;
+    }
+
+    public Avion getAvion() {
+        return new Avion();
     }
 
     public void setAlimentation(double txB, double txV) {
@@ -86,18 +98,22 @@ public class Utilisateur {
         this.lstLogements.add(logement);
     }
 
-    public void addVoiture(Transport transport) {
-        this.lstVoitures.add(transport);
+    public void addTransport(Transport transport) {
+        this.lstTransports.add(transport);
     }
 
     public double calculerImpact() {
         if (this.lstLogements.size() != 0)
             for (Logement logement : this.lstLogements)
                 logement.calculImpact();
-        if (this.lstVoitures.size() != 0)
-            for (Transport transport : this.lstVoitures)
-                if (transport.isPossede())
+        if (this.lstTransports.size() != 0)
+            for (Transport transport : this.lstTransports) {
+                if (transport instanceof Voiture)
+                    if (((Voiture) transport).isPossede())
+                        transport.calculImpact();
+                if (transport instanceof Avion)
                     transport.calculImpact();
+            }
 
         this.alimentation.calculImpact();
         this.bienConso.   calculImpact();
@@ -111,7 +127,7 @@ public class Utilisateur {
     }
 
     private double getImpactTransports() {
-        return this.lstVoitures.stream().mapToDouble(Transport::getImpact).sum();
+        return this.lstTransports.stream().mapToDouble(Transport::getImpact).sum();
     }
 
     private double getImpactLogements() {
@@ -133,12 +149,20 @@ public class Utilisateur {
                 dtl += String.format("\tLogement N°%d : %.2f tonnes CO2/an\n", (i+1), this.lstLogements.get(i).getImpact());
         }
 
-        if (this.lstVoitures.size() == 1)
-            dtl += String.format("%-17s : %.2f tonnes CO2/an\n", "Transport", this.lstVoitures.get(0).getImpact());
+        if (this.getImpactTransports() == 0)
+            dtl += String.format("%-17s : %.2f tonnes CO2/an\n", this.lstTransports.get(0).getClass().getSimpleName(), this.lstTransports.get(0).getImpact());
         else {
+            int cpt = 0;
             dtl += "Transports : \n";
-            for (int i = 0; i < this.lstVoitures.size(); i++)
-                dtl += String.format("\tVoirture N°%d : %.2f tonnes CO2/an\n", (i+1), this.lstVoitures.get(i).getImpact());
+            this.lstTransports.sort(Comparator.comparing(transport -> transport.getClass().getSimpleName(),Comparator.reverseOrder()));
+            for (int i = 0; i < this.lstTransports.size(); i++)
+                if (this.lstTransports.get(i) instanceof Voiture) {
+                    dtl += String.format("\t%s N°%d : %.2f tonnes CO2/an\n", this.lstTransports.get(i).getClass().getSimpleName(), (i + 1), this.lstTransports.get(i).getImpact());
+                    cpt++;
+                }
+            for (int i = cpt; i < this.lstTransports.size(); i++)
+                if (this.lstTransports.get(i) instanceof Avion)
+                    dtl += String.format("\t%s N°%d : %.2f tonnes CO2/an\n", this.lstTransports.get(i).getClass().getSimpleName(), (i-cpt+1), this.lstTransports.get(i).getImpact());
         }
 
         System.out.println(dtl);
@@ -161,7 +185,7 @@ public class Utilisateur {
                           (e1, e2) -> e1,
                           LinkedHashMap::new));
 
-        System.out.println("Liste des consommations carbonne");
+        System.out.println("Liste ordone des consommations carbone");
         int[] counter = new int[1];
         String lstRanked = "";
         for (String key : map.keySet())

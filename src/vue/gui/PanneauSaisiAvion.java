@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanneauSaisiTransport extends JPanel implements ActionListener {
+public class PanneauSaisiAvion extends JPanel implements ActionListener {
     private JLabel lbl;
     private JTextField textField;
     private JButton btn;
@@ -18,14 +18,14 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
     private List<JPanel> lst;
     private Controleur controleur;
 
-    public PanneauSaisiTransport(Color color, Controleur controleur) {
+    public PanneauSaisiAvion(Color color, Controleur controleur) {
         this.controleur = controleur;
         this.color = color;
         this.btn = new JButton("Suivant");
         this.btn.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
         this.btn.setForeground(Color.white);
         this.btn.setBackground(new Color(86, 87, 187));
-        this.lbl = new JLabel("Combien de voiture portez-vous ? ");
+        this.lbl = new JLabel("Combien de fois vous avez voyagé en avion ? ");
         this.lbl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
         this.lbl.setForeground(Color.white);
         this.textField = new JTextField(10);
@@ -57,24 +57,24 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int nbVoirture = 0;
+        int nbVoyage = 0;
         if (this.textField.getText().equals(""))
-            JOptionPane.showMessageDialog(this, "Veuillez saisir le nombre de voiture.");
+            JOptionPane.showMessageDialog(this, "Veuillez saisir le nombre de voyage en avion.");
         else {
-            nbVoirture = Integer.parseInt(this.textField.getText());
+            nbVoyage = Integer.parseInt(this.textField.getText());
 
             if (this.lst == null) {
                 // Possede un ou des voitures
-                if (nbVoirture != 0) {
+                if (nbVoyage != 0) {
                     this.remove(this.btn);
                     this.lbl.setVisible(false);
                     this.textField.setVisible(false);
                     this.lst = new ArrayList<>();
 
-                    for (int i = 0; i < nbVoirture; i++) {
+                    for (int i = 0; i < nbVoyage; i++) {
                         JPanel panel = new JPanel();
                         panel.setBackground(this.color);
-                        JLabel l1 = new JLabel("Voiture N°" + (i+1) + " : ");
+                        JLabel l1 = new JLabel("Voyage N°" + (i+1) + " : ");
                         l1.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                         l1.setForeground(Color.white);
                         ButtonGroup bg = new ButtonGroup();
@@ -93,19 +93,12 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                         JLabel j2 = new JLabel("Kms");
                         j2.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                         j2.setForeground(Color.white);
-                        JTextField j3 = new JTextField("", 5);
-                        j3.setDocument(new NumberDocument());
-                        JLabel j4 = new JLabel("année d'ammortissement");
-                        j4.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
-                        j4.setForeground(Color.white);
 
                         panel.add(l1);
                         panel.add(r1);
                         panel.add(r2);
                         panel.add(j1);
                         panel.add(j2);
-                        panel.add(j3);
-                        panel.add(j4);
 
                         this.gbc.gridx = 0;
                         this.gbc.gridy = i;
@@ -113,14 +106,14 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
 
                         this.lst.add(panel);
                     }
-                    this.gbc.gridy = nbVoirture + 1;
+                    this.gbc.gridy = nbVoyage + 1;
                     this.add(this.btn, this.gbc);
                 }
                 // Ne possede pas de voiture
                 else {
-                    this.controleur.addTransport(this.controleur.getTransport());
+                    this.controleur.addTransport(this.controleur.getAvion());
                     this.removeAll();
-                    this.controleur.terminerTransport();
+                    this.controleur.terminerAvion();
                     this.controleur.afficheResultat();
                     JLabel tl = new JLabel("Vous avez terminé cette étape !");
                     tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
@@ -154,20 +147,10 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                                     estCompleter = true;
                                 }
                             }
-                            if (((JTextField) component).getText().equals("")) {
-                                estCompleter = false;
-                                break;
-                            }
-                            else {
-                                if (((JTextField) component).equals(panel.getComponent(5))) {
-                                    amortissement = Integer.parseInt(((JTextField) component).getText());
-                                    estCompleter = true;
-                                }
-                            }
                         }
                     }
                     if (estCompleter) {
-                        this.controleur.addTransport(this.controleur.getTransport(taille,kilomettre,amortissement));
+                        this.controleur.addTransport(this.controleur.getAvion(taille,kilomettre));
                         this.controleur.calculerImpact();
                         this.remove(panel);
                     }
@@ -176,7 +159,7 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
                 }
                 if (estCompleter) {
                     this.remove(this.btn);
-                    this.controleur.terminerTransport();
+                    this.controleur.terminerAvion();
                     JLabel tl = new JLabel("Vous avez terminé cette étape !");
                     tl.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 22));
                     tl.setForeground(Color.white);

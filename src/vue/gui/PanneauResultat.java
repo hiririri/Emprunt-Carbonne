@@ -13,7 +13,7 @@ public class PanneauResultat extends JPanel {
     public PanneauResultat(Controleur controler) {
         this.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 0));
 
-        this.lblInfo = new JLabel("Mon Empreinte Carbonne :");
+        this.lblInfo = new JLabel("Mon Emprunt Carbonne :");
         this.lblData = new JLabel("0.0");
         this.lblUnite = new JLabel("tonnes de CO2/an");
 

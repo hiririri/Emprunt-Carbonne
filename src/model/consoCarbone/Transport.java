@@ -4,67 +4,10 @@ package model.consoCarbone;
  * This is a class simulates carbon consume of transport
  */
 public class Transport extends ConsoCarbone{
-    private boolean possede;
-    private Taille taille;
     private int kilomAnnee;
-    private int amortissement;
-
-    /**
-     * Class constructor specifying possession, size, kilometer and amortization of transport.
-     * @param taille size of transport
-     * @param kilomAnnee kilometer of transport
-     * @param amortissement amortization of transport
-     */
-    public Transport(Taille taille, int kilomAnnee, int amortissement) {
-        super();
-
-        this.possede = true;
-        this.taille = taille;
-        this.kilomAnnee = kilomAnnee;
-        this.amortissement = amortissement;
-
-        this.calculImpact();
-    }
 
     public Transport() {
         super();
-
-        this.impact = 0;
-        this.taille = Taille.G;
-        this.kilomAnnee = 0;
-        this.amortissement = 1;
-    }
-
-    /**
-     * Verify if the transport is under possession.
-     * @return true if under possession, false if non.
-     */
-    public boolean isPossede() {
-        return possede;
-    }
-
-    /**
-     * Set possession.
-     * @param possede possession of transport
-     */
-    public void setPossede(boolean possede) {
-        this.possede = possede;
-    }
-
-    /**
-     * Get size of transport.
-     * @return size of transport
-     */
-    public Taille getTaille() {
-        return taille;
-    }
-
-    /**
-     * Set size of transport.
-     * @param taille size of transport
-     */
-    public void setTaille(Taille taille) {
-        this.taille = taille;
     }
 
     /**
@@ -84,28 +27,10 @@ public class Transport extends ConsoCarbone{
     }
 
     /**
-     * Get amortization of transport.
-     * @return amortization of transport
-     */
-    public int getAmortissement() {
-        return amortissement;
-    }
-
-    /**
-     * Set amortization of transport
-     * @param amortissement amortization of transport
-     */
-    public void setAmortissement(int amortissement) {
-        this.amortissement = amortissement;
-    }
-
-    /**
      * Methode used for calculating the impact of Empreinte Carbonne of transport.
      */
     @Override
-    public void calculImpact() {
-        this.impact = this.possede ? this.kilomAnnee * 1.93 * Math.pow(10,-4) + this.taille.emet / this.amortissement : 0;
-    }
+    public void calculImpact() {}
 
     /**
      * Method used for comparing impact of Empreinte Carbonne of transport.
@@ -128,11 +53,8 @@ public class Transport extends ConsoCarbone{
         return String.format("Transport{" +
                 "id=%d" +
                 ", impact=%.2f" +
-                ", possede=%b" +
-                ", taille=%s : %.1f" +
                 ", kilomAnnee=%d" +
-                ", amortissement=%d" +
-                "}", this.id, this.impact, this.possede, this.taille.name(), this.taille.emet, this.kilomAnnee, this.amortissement);
+                "}", this.id, this.impact, this.kilomAnnee);
     }
 
     /**

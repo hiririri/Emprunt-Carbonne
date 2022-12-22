@@ -1,6 +1,7 @@
 package vue.console;
 
 import controleur.Controleur;
+import model.consoCarbone.Avion;
 import model.utilisateur.Utilisateur;
 
 import java.io.*;
@@ -24,7 +25,7 @@ public class MenuPrincipal {
         System.out.println("\033[1;92m2\033[m. Interface graphique.");
         System.out.println("\033[1;92m3\033[m. Charger un utilisateur a partir d'un ficher.");
         System.out.println("\033[1;92m4\033[m. Tester la classe ServicePublics. (Cette option entrainera la fermeture du programme.)");
-        System.out.println("\033[1;92m5\033[m. Tester la classe Transport. (Cette option entrainera la fermeture du programme.)");
+        System.out.println("\033[1;92m5\033[m. Tester la classe Voiture. (Cette option entrainera la fermeture du programme.)");
         System.out.println("\033[1;92m0\033[m. Quitter");
         System.out.print("Veuillez choisir un numero : ");
     }
@@ -53,6 +54,10 @@ public class MenuPrincipal {
                     car = str.charAt(0);
                 }
             }
+            case 3 -> {
+                while (!MyExceptions.verifierSaisiEtatMenu("^[O|N]$",car))
+                    car = sc.next().charAt(0);
+            }
         }
         
         return car;
@@ -60,10 +65,11 @@ public class MenuPrincipal {
 
     public void frameCUI() {
         menu = new ArrayList<>();
-        menu.add("1. Calculer l'empreinte carbon dans Transport");
-        menu.add("2. Calculer l'empreinte carbon dans Logement");
-        menu.add("3. Calculer l'empreinte carbon dans Alimentation");
-        menu.add("4. Calculer l'empreinte carbon dans Bien Consommation");
+        menu.add("1. Calculer l'empreinte carbon dans Voiture");
+        menu.add("2. Calculer l'empreinte carbon dans Avion");
+        menu.add("3. Calculer l'empreinte carbon dans Logement");
+        menu.add("4. Calculer l'empreinte carbon dans Alimentation");
+        menu.add("5. Calculer l'empreinte carbon dans Bien Consommation");
         menu.add("0. Retourner");
         menu.add("Veuillez choisir un numero : ");
         this.afficherMenu();
@@ -77,8 +83,12 @@ public class MenuPrincipal {
             }
             for (int i = 0; i < menu.size(); i++) {
                 if (action == menu.get(i).charAt(0)) {
-                    if (menu.get(i).substring(36).equals("Transport")) {
-                        if (this.menuTransport())
+                    if (menu.get(i).substring(36).equals("Voiture")) {
+                        if (this.menuVoiture())
+                            menu = this.majMenu(menu.get(i).substring(36), menu);
+                    }
+                    else if (menu.get(i).substring(36).equals("Avion")) {
+                        if (this.menuAvion())
                             menu = this.majMenu(menu.get(i).substring(36), menu);
                     }
                     else if (menu.get(i).substring(36).equals("Logement")) {
@@ -96,10 +106,7 @@ public class MenuPrincipal {
                 }
 
                 if (menu.size() == 2) {
-                    System.out.println("+---------------------------------------------------------------------+");
-                    System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
-                    System.out.println("+---------------------------------------------------------------------+");
-                    System.out.println(String.format("Mon Empreinte Carbonne : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
+                    this.afficherPanneauResultat();
                     this.controleur.detaillerResultat();
                     this.controleur.reconmmander();
                     this.controleur.retourner();
@@ -112,6 +119,8 @@ public class MenuPrincipal {
             action = this.getAction(1);
         }
     }
+
+
 
     private void afficherMenu() {
         System.out.println("+---------------------------------------------------------------------+");
@@ -225,9 +234,9 @@ public class MenuPrincipal {
         return true;
     }
 
-    private boolean menuTransport() {
+    private boolean menuVoiture() {
         System.out.println("+---------------------------------------------------------------------+");
-        System.out.println("|                            \033[1;91m* Transport *\033[m                            |");
+        System.out.println("|                             \033[1;91m* Voiture *\033[m                             |");
         System.out.println("+---------------------------------------------------------------------+");
         Scanner sc = new Scanner(System.in);
         char repNbVoiture;
@@ -236,12 +245,12 @@ public class MenuPrincipal {
         if (repNbVoiture == 'R')
             return false;
         if (repNbVoiture == '0')
-            this.controleur.addVoiture(this.controleur.getTransport());
+            this.controleur.addTransport(this.controleur.getTransport());
         else {
             for (int i = 0; i < (int)repNbVoiture - 48; i++) {
                 System.out.print("Format : (Taille)(P/G),(Kilometre)(9 chiffres max),(Annee d'armotissement)(3 chiffres max)\n" +
                                  "Exemple : \033[1;92mP,100000,6\033[m\n" +
-                                 "Veuillez saisir les information de votre voitrue N° " + (i+1) + " : ");
+                                 "Veuillez saisir les informations de votre voitrue N° " + (i+1) + " : ");
                 String str = sc.next();
                 String msg = "Format : (Taille (P/G)),(Kilometre),(Annee d'armotissement)\n" +
                              "Exemple : \033[1;92mP,100000,6\033[m\n" +
@@ -249,9 +258,39 @@ public class MenuPrincipal {
                 while (!MyExceptions.verifierSaisiInfo("^[P|G],\\d{0,9},\\d{0,3}$",str,msg))
                     str = sc.next();
                 String[] tabInfo = str.split(",");
-                this.controleur.addVoiture(this.controleur.getTransport(tabInfo[0].charAt(0),
+                this.controleur.addTransport(this.controleur.getTransport(tabInfo[0].charAt(0),
                                                                         Integer.parseInt(tabInfo[1]),
                                                                         Integer.parseInt(tabInfo[2])));
+            }
+        }
+
+        return true;
+    }
+    private boolean menuAvion() {
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                              \033[1;91m* Avion *\033[m                              |");
+        System.out.println("+---------------------------------------------------------------------+");
+        Scanner sc = new Scanner(System.in);
+        char nbFois;
+        System.out.print("Combien de fois vous avez voyagé en avion ? (Appuyer '\033[1;92mR\033[m' pour retourner) ? ");
+        nbFois = this.getAction(2);
+        if (nbFois == 'R')
+            return false;
+        if (nbFois == '0')
+            this.controleur.addTransport(this.controleur.getAvion());
+        else {
+            for (int i = 0; i < (int)nbFois - 48; i++) {
+                System.out.print("Format : (Taille)(P/G),(Kilometre)(9 chiffres max)\n" +
+                        "Exemple : \033[1;92mP,100000\033[m\n" +
+                        "Veuillez saisir les informations de le voyage " + (i+1) + " en Avion : ");
+                String str = sc.next();
+                String msg = "Format : (Taille (P/G)),(Kilometre)\n" +
+                        "Exemple : \033[1;92mP,100000\033[m\n" +
+                        "Saisir \033[1;93mDOIT ETRE EN FORMAT\033[m. Veuillez resaisir l'ensemble d'informations : ";
+                while (!MyExceptions.verifierSaisiInfo("^[P|G],\\d{0,9}$",str,msg))
+                    str = sc.next();
+                String[] tabInfo = str.split(",");
+                this.controleur.addTransport(this.controleur.getAvion(tabInfo[0].charAt(0),Integer.parseInt(tabInfo[1])));
             }
         }
 
@@ -266,18 +305,31 @@ public class MenuPrincipal {
                 read = new InputStreamReader(new FileInputStream(file), "UTF-8");
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = "";
+                int cpt = 1;
                 while ((lineTxt = bufferedReader.readLine()) != null) {
                     String[] tabInfo = lineTxt.split(" ");
-                    this.controleur.chargerUtilisateur(
-                            Double.parseDouble(tabInfo[0]),
-                            Double.parseDouble(tabInfo[1]),
-                            Integer.parseInt(tabInfo[2]),
-                            Integer.parseInt(tabInfo[3]),
-                            tabInfo[4].charAt(0),
-                            tabInfo[5].charAt(0),
-                            Integer.parseInt(tabInfo[6]),
-                            Integer.parseInt(tabInfo[7]));
+                    if (MyExceptions.verifierChargerUtilisateur(Double.parseDouble(tabInfo[0]),
+                                                                Double.parseDouble(tabInfo[1]),
+                                                                Integer.parseInt(tabInfo[2]),
+                                                                Integer.parseInt(tabInfo[3]),
+                                                                tabInfo[4].charAt(0),
+                                                                tabInfo[5].charAt(0),
+                                                                Integer.parseInt(tabInfo[6]),
+                                                                Integer.parseInt(tabInfo[7]),
+                                                                cpt)) {
+                        this.controleur.chargerUtilisateur(
+                                Double.parseDouble(tabInfo[0]),
+                                Double.parseDouble(tabInfo[1]),
+                                Integer.parseInt(tabInfo[2]),
+                                Integer.parseInt(tabInfo[3]),
+                                tabInfo[4].charAt(0),
+                                tabInfo[5].charAt(0),
+                                Integer.parseInt(tabInfo[6]),
+                                Integer.parseInt(tabInfo[7]));
+                    }
+                    cpt++;
                 }
+                this.controleur.retourner();
             }
             read.close();
         } catch (IOException e) {
@@ -285,13 +337,20 @@ public class MenuPrincipal {
         }
     }
 
-    public void afficherNouvelUtilisateur(Utilisateur utilisateur) {
+    public void afficherNouvelUtilisateur() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
         System.out.println("+---------------------------------------------------------------------+");
-        System.out.println(String.format("Empreinte Carbonne de l'utilisateur charge : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
-        utilisateur.detaillerEmpreinte();
-        utilisateur.recommender();
+        System.out.println(String.format("Emprunt Carbonne de l'utilisateur : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
+        this.controleur.detaillerResultat();
+        this.controleur.reconmmander();
         this.controleur.retourner();
+    }
+
+    public void afficherPanneauResultat() {
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
+        System.out.println("+---------------------------------------------------------------------+");
+        System.out.println(String.format("Emprunt Carbonne de l'utilisateur : %.2f tonnes CO2 / an", this.controleur.calculerImpact()));
     }
 }

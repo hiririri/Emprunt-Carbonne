@@ -1,5 +1,6 @@
 package controleur;
 
+import model.consoCarbone.Avion;
 import model.consoCarbone.Logement;
 import model.consoCarbone.ServicePublics;
 import model.consoCarbone.Transport;
@@ -36,7 +37,7 @@ public class Controleur {
     }
 
     private void testClassTransport() {
-        JUnitCore.main("model.test.TransportTest");
+        JUnitCore.main("model.test.VoitureTest");
     }
 
     public void testClassServicePublics() {
@@ -44,9 +45,9 @@ public class Controleur {
     }
 
     public void chargerUtilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie, char taille, int kilomettre, int amortissement) {
-        Utilisateur utilisateurCharge = new Utilisateur(txB,txV,montant,superficie,niveauEnergie,taille,kilomettre,amortissement);
-        utilisateurCharge.setServices(this.utilisateur.getServicePublics());
-        this.menu.afficherNouvelUtilisateur(utilisateurCharge);
+        this.utilisateur = new Utilisateur(txB,txV,montant,superficie,niveauEnergie,taille,kilomettre,amortissement);
+        this.utilisateur.setServices(ServicePublics.instance);
+        this.menu.afficherNouvelUtilisateur();
     }
 
     public void retourner() {
@@ -56,15 +57,31 @@ public class Controleur {
     }
 
     public Transport getTransport(char taille, int kilomettre, int amortissement) {
-        return this.utilisateur.getTransport(taille,kilomettre,amortissement);
+        return this.utilisateur.getVoiture(taille,kilomettre,amortissement);
     }
 
     public Transport getTransport() {
-        return this.utilisateur.getTransport();
+        return this.utilisateur.getVoiture();
+    }
+
+    public Avion getAvion() {
+        return this.utilisateur.getAvion();
     }
 
     public Logement getLogement(int superficie, char niveauEnergie) {
         return this.utilisateur.getLogement(superficie,niveauEnergie);
+    }
+
+    public Avion getAvion(char taille, int kilomettre) {
+        return this.utilisateur.getAvion(taille,kilomettre);
+    }
+
+    public void terminerAvion() {
+        this.frame.terminerAvion();
+    }
+
+    public void afficherPanneauResultat() {
+        this.menu.afficherPanneauResultat();
     }
 
     public void setResultatPane(double res) {
@@ -79,8 +96,8 @@ public class Controleur {
         this.utilisateur.addLogement(logement);
     }
 
-    public void addVoiture(Transport transport) {
-        this.utilisateur.addVoiture(transport);
+    public void addTransport(Transport transport) {
+        this.utilisateur.addTransport(transport);
     }
 
     public void setAlimentation(double txB, double txV) {

@@ -60,6 +60,10 @@ public class FramePrincipal extends JFrame {
         this.panneauSaisi.majPanneau(secteur, color);
     }
 
+    public void terminerAvion() {
+        this.panneauSecteur.terminerAvion();
+    }
+
     public void terminerTransport() {
         this.panneauSecteur.terminerTransport();
     }

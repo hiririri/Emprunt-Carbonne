@@ -1,7 +1,7 @@
 package model.test;
 
-import model.consoCarbone.Taille;
-import model.consoCarbone.Transport;
+import model.consoCarbone.TailleVoiture;
+import model.consoCarbone.Voiture;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before; 
@@ -14,12 +14,12 @@ import org.junit.After;
 * @since <pre>20/12/2022</pre>
 * @version 1.0 
 */ 
-public class TransportTest {
-    private Transport test = null;
+public class VoitureTest {
+    private Voiture test = null;
 
     @Before
     public void before() throws Exception {
-        test = new Transport();
+        test = new Voiture();
     }
 
     @After
@@ -58,7 +58,7 @@ public class TransportTest {
     @Test
     public void getTaille_testGetTailleFunction_returnsDefaultCarSizeOfObjectTransport() throws Exception {
         //TODO: Test goes here...
-        Assert.assertEquals(Taille.G, test.getTaille());
+        Assert.assertEquals(TailleVoiture.G, test.getTailleVoiture());
     }
 
     /**
@@ -69,8 +69,8 @@ public class TransportTest {
     @Test
     public void setTaille_testSetTailleFunction_resetCarSizeIntoSmall() throws Exception {
         //TODO: Test goes here...
-        test.setTaille(Taille.P);
-        Assert.assertEquals(Taille.P, test.getTaille());
+        test.setTailleVoiture(TailleVoiture.P);
+        Assert.assertEquals(TailleVoiture.P, test.getTailleVoiture());
     }
 
     /**
@@ -127,7 +127,7 @@ public class TransportTest {
     @Test
     public void calculImpact_testCalculImpactFunction_returnsNewImpactAfterCalculate() throws Exception {
         //TODO: Test goes here...
-        this.test.calculImpact();
-        Assert.assertNotEquals(0,test.getImpact(), 0);
+        test.calculImpact();
+        Assert.assertEquals(0.893,test.getImpact(), 0.893);
     }
 } 

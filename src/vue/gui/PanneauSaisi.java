@@ -18,7 +18,7 @@ public class PanneauSaisi extends JPanel implements ActionListener {
 
     public PanneauSaisi(Controleur controleur) {
         this.controleur = controleur;
-        this.secteur = "Transport";
+        this.secteur = "Avion";
         this.color = new Color(182, 21, 64);
 
         this.setLayout(new GridBagLayout());
@@ -73,6 +73,10 @@ public class PanneauSaisi extends JPanel implements ActionListener {
             this.remove(this.psbc);
             this.remove(this.scrollPane);
         }
+        if (this.psva != null) {
+            this.remove(this.psva);
+            this.remove(this.scrollPane);
+        }
         this.repaint();
     }
 
@@ -91,25 +95,32 @@ public class PanneauSaisi extends JPanel implements ActionListener {
     private PanneauSaisiLogement psl;
     private PanneauSaisiAlimentation psa;
     private PanneauSaisiBienConso psbc;
+    private PanneauSaisiAvion psva;
     private JScrollPane scrollPane;
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setEtat(false);
-        if (this.secteur.equals("Transport")) {
-            this.pst = new PanneauSaisiTransport(this.color, this.controleur);
-            this.scrollPane = new JScrollPane(this.pst);
-        }
-        if (this.secteur.equals("Logement")) {
-            this.psl = new PanneauSaisiLogement(this.color, this.controleur);
-            this.scrollPane = new JScrollPane(this.psl);
-        }
-        if (this.secteur.equals("Alimentation")) {
-            this.psa= new PanneauSaisiAlimentation(this.color, this.controleur);
-            this.scrollPane = new JScrollPane(this.psa);
-        }
-        if (this.secteur.equals("BienConso")) {
-            this.psbc = new PanneauSaisiBienConso(this.color, this.controleur);
-            this.scrollPane = new JScrollPane(this.psbc);
+        switch (this.secteur) {
+            case "Avion" -> {
+                this.psva = new PanneauSaisiAvion(this.color, this.controleur);
+                this.scrollPane = new JScrollPane(this.psva);
+            }
+            case "Voiture" -> {
+                this.pst = new PanneauSaisiTransport(this.color, this.controleur);
+                this.scrollPane = new JScrollPane(this.pst);
+            }
+            case "Logement" -> {
+                this.psl = new PanneauSaisiLogement(this.color, this.controleur);
+                this.scrollPane = new JScrollPane(this.psl);
+            }
+            case "Alimentation" -> {
+                this.psa= new PanneauSaisiAlimentation(this.color, this.controleur);
+                this.scrollPane = new JScrollPane(this.psa);
+            }
+            case "BienConso" -> {
+                this.psbc = new PanneauSaisiBienConso(this.color, this.controleur);
+                this.scrollPane = new JScrollPane(this.psbc);
+            }
         }
         scrollPane.setPreferredSize(this.getSize());
         scrollPane.setBackground(this.color);

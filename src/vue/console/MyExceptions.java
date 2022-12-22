@@ -62,4 +62,30 @@ public class MyExceptions extends Exception{
 
         return true;
     }
+
+    public static boolean verifierSaisiEtatMenu(String reg, char car) {
+        try {
+            if (car != 'O' && car != 'N')
+                throw new MyExceptions("Saisi \033[1;93mDOIT ETRE O(Oui) ou N(Non)\033[m. Veuillez resaisir : ");
+        } catch (MyExceptions e) {
+            System.out.print(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean verifierChargerUtilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie,
+                                                     char taille, int kilomettre, int amortissement, int cpt) {
+        try {
+            if (txB < 0 || txV < 0 || 1 - txB - txV < 0 || montant < 0 || superficie < 0 ||
+                niveauEnergie < 'A' || niveauEnergie > 'G' || taille != 'P' && taille != 'G' || kilomettre < 0 || amortissement < 0)
+                throw new MyExceptions("\033[1;91mMauvaises données utilisateur " + cpt + " dans le ficher data.txt\033[m.");
+        } catch (MyExceptions e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
 }

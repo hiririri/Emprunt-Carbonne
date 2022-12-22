@@ -1,12 +1,12 @@
 package model.consoCarbone;
 
-public enum Taille {
+public enum TailleVoiture {
     P(4.2),
     G(19 );
 
     public double emet;
 
-    private Taille(double coeff) {
+    private TailleVoiture(double coeff) {
         this.emet = coeff;
     }
 }
