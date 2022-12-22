@@ -97,14 +97,11 @@ public class Voiture extends Transport{
      */
     @Override
     public String toString() {
-        return String.format("Voiture{" +
-                "id=%d" +
-                ", impact=%.2f" +
+        return String.format("Voiture{" + super.toString() +
                 ", possede=%b" +
                 ", tailleV=%s : %.1f" +
-                ", kilomAnnee=%d" +
                 ", amortissement=%d" +
-                "}", this.id, this.impact, this.possede, this.tailleV.name(), this.tailleV.emet, this.getKilomAnnee(), this.amortissement);
+                "}", this.possede, this.tailleV.name(), this.tailleV.emet, this.amortissement);
     }
 
 

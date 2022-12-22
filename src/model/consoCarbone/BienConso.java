@@ -47,11 +47,9 @@ public class BienConso extends ConsoCarbone{
      */
     @Override
     public String toString() {
-        return String.format("BienConso{" +
-                "id=%d" +
-                ", impact=%.2f" +
+        return String.format("BienConso{" + super.toString() +
                 ", montant=%.2f" +
-                "}", this.id, this.impact, this.montant);
+                "}", this.montant);
     }
 
     /**

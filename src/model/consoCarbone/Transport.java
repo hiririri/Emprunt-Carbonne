@@ -38,11 +38,9 @@ public class Transport extends ConsoCarbone{
      */
     @Override
     public String toString() {
-        return String.format("Transport{" +
-                "id=%d" +
-                ", impact=%.2f" +
+        return String.format("Transport{" + super.toString() +
                 ", kilomAnnee=%d" +
-                "}", this.id, this.impact, this.kilomAnnee);
+                "}", this.kilomAnnee);
     }
 
     /**

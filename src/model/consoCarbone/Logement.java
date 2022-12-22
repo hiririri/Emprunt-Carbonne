@@ -59,12 +59,10 @@ public class Logement extends ConsoCarbone {
      */
     @Override
     public String toString() {
-        return String.format("Logement{" +
-                "id=%d" +
-                ", impact=%.2f" +
+        return String.format("Logement{" + super.toString() +
                 ", ce=%s : %.3f" +
                 ", superficie=%d" +
-                "}", this.id, this.impact, this.ce.name(), this.ce.alpha, this.superficie);
+                "}", this.ce.name(), this.ce.alpha, this.superficie);
     }
 
 

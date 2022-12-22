@@ -85,11 +85,9 @@ public class Alimentation extends ConsoCarbone{
      */
     @Override
     public String toString() {
-        return String.format("Alimentation{" +
-                "Id=%d " +
-                "Impact=%.2f " +
+        return String.format("Alimentation{" + super.toString() +
                 "Taux Boeuf=%.2f " +
-                "Taux Vege=%.2f}", this.id, this.impact, this.txBoeuf, this.txVege);
+                "Taux Vege=%.2f}", this.txBoeuf, this.txVege);
     }
 
 

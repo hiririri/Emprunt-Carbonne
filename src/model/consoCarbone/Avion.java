@@ -37,11 +37,7 @@ public class Avion extends Transport{
     */
    @Override
    public String toString() {
-       return String.format("Avion{" +
-               "id=%d" +
-               ", impact=%.2f" +
-               ", kilomAnnee=%d" +
-               "}", this.id, this.impact, this.getKilomAnnee());
+       return super.toString();
    }
 
 }
