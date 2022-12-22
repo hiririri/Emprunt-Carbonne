@@ -37,7 +37,7 @@ public class Avion extends Transport{
     */
    @Override
    public String toString() {
-       return super.toString();
+       return String.format("%s, voyageEnAvion=%b, tailleAvion=%s : %.1f", super.toString(), this.voyagerEnAvion, this.tailleA.name(), this.tailleA.emet);
    }
 
 }

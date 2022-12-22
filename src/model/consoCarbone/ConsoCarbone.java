@@ -60,9 +60,6 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
      */
     @Override
     public String toString() {
-        return "ConsoCarbone{" +
-                "id=" + id +
-                ", impact=" + impact +
-                '}';
+        return String.format("id=%d, impact=%.2f", this.id, this.impact);
     }
 }

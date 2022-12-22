@@ -220,4 +220,15 @@ public class Utilisateur {
             default                  -> System.out.println("L’Etat doit aider les services publics à se réformer pour qu’ils puissent le plus rapidement possible être neutres en carbone.");
         }
     }
+
+    @Override
+    public String toString() {
+        return "Utilisateur{" +
+                "\nalimentation=" + alimentation.toString() +
+                ", \nbienConso=" + bienConso.toString() +
+                ", \nservice=" + service.toString() +
+                ", \nlstLogements=" + lstLogements.toString() +
+                ", \nlstTransports=" + lstTransports.toString() +
+                "\n}";
+    }
 }

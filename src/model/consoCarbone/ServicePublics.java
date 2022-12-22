@@ -47,10 +47,7 @@ public class ServicePublics extends ConsoCarbone {
      */
     @Override
     public String toString() {
-        return String.format("ServicePublics{" +
-                "id=%d" +
-                ", impact=%.2f" +
-                '}', this.id, this.impact);
+        return "ServicePublics{" + super.toString() + "}";
     }
 
     /**
