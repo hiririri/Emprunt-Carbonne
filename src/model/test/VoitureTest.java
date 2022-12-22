@@ -8,20 +8,34 @@ import org.junit.Before;
 import org.junit.After; 
 
 /** 
-* Transport Tester. 
+* Voiture Tester.
 * 
-* @author <Authors name>
+* @author Qinming JIANG
 * @since <pre>20/12/2022</pre>
 * @version 1.0 
 */ 
 public class VoitureTest {
+
+    /**
+     * Instance Voiture
+     */
     private Voiture test = null;
 
+    /**
+     * Before.
+     *
+     * @throws Exception the exception
+     */
     @Before
     public void before() throws Exception {
         test = new Voiture();
     }
 
+    /**
+     * After.
+     *
+     * @throws Exception the exception
+     */
     @After
     public void after() throws Exception {
         test = null;

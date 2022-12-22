@@ -1,15 +1,22 @@
 package model.consoCarbone;
 
-import model.utilisateur.Utilisateur;
-
 /**
- * This is a class simulates carbon consume of public service.
+ * A ServicePublics objet is an AppEmpruntCarbonServicePublics
+ * who calculates the carbon footprint of public service.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 2.0
  */
 public class ServicePublics extends ConsoCarbone {
+    /**
+     * The constant instance.
+     */
     public static ServicePublics instance;
 
     /**
-     * Methode used for creating the instance of class ServicePublics.
+     * Methode used for creating the unique instance of class ServicePublics.
+     *
      * @return instance of ServicePublics
      */
     public static ServicePublics creatServicePublics() {
@@ -34,7 +41,7 @@ public class ServicePublics extends ConsoCarbone {
     }
 
     /**
-     * Methode used for calculating the impact of Empreinte Carbonne of public service.
+     * Methode used for calculating the impact of Empreinte Carbone of public service.
      */
     @Override
     public void calculImpact() {
@@ -42,7 +49,7 @@ public class ServicePublics extends ConsoCarbone {
     }
 
     /**
-     * Methode used for viewing the necessary information of Empreinte Carbonne of public service.
+     * Methode used for viewing the necessary information of Empreinte Carbone of public service.
      * @return information in string format.
      */
     @Override
@@ -51,7 +58,7 @@ public class ServicePublics extends ConsoCarbone {
     }
 
     /**
-     * Methode used for viewing the average of Empreinte Carbonne of public service in France.
+     * Methode used for viewing the average of Empreinte Carbone of public service in France.
      */
     public static void moyenEmpreinteCarboneServicePublics() {
         System.out.println("Empreinte carbone moyenne d'un français par rapport au service publics : \n" +

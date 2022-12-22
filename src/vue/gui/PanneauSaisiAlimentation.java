@@ -7,17 +7,60 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A PanneauSaisiAlimentation objet is an JPanel
+ * who allows inputting information of Alimentation
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisiAlimentation extends JPanel implements ActionListener {
+    /**
+     * Meet label
+     */
     private JLabel lblBoeuf;
+
+    /**
+     * Rate meet text field
+     */
     private JTextField tfBoeuf;
+
+    /**
+     * Vegetable label
+     */
     private JLabel lblVege;
+
+    /**
+     * Rate vegetable text field
+     */
     private JTextField tfVege;
+
+    /**
+     * 'Suivant' button
+     */
     private JButton btn;
+
+    /**
+     * GridBag Layout Constraints
+     */
     private GridBagConstraints gbc;
 
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau saisi alimentation.
+     *
+     * @param color      the color
+     * @param controleur the controleur
+     */
     public PanneauSaisiAlimentation(Color color, Controleur controleur) {
         this.color = color;
         this.controleur = controleur;
@@ -73,6 +116,11 @@ public class PanneauSaisiAlimentation extends JPanel implements ActionListener {
         this.btn.addActionListener(this);
     }
 
+    /**
+     * Event associated with the button 'Suivant'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!this.tfVege.getText().equals("") && !this.tfBoeuf.equals("")) {

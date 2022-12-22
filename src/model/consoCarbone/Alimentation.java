@@ -1,20 +1,45 @@
 package model.consoCarbone;
 
 /**
- * This is a class simulates carbon consume of nutrition
+ * A Alimentation objet is an AppEmpruntCarbonAlimentatoin
+ * who calculates the carbon footprint of food.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.0
  */
 public class Alimentation extends ConsoCarbone{
-    private static double VAL_B = 8;
-    private static double VAL_A = 1.6;
-    private static double VAL_V = 0.9;
 
+    /**
+     * Coefficient of calculating eating meet
+     */
+    private static final double VAL_B = 8;
+
+    /**
+     * Coefficient of calculating eating other food
+     */
+    private static final double VAL_A = 1.6;
+
+    /**
+     * Coefficient of calculating eating vegetable
+     */
+    private static final double VAL_V = 0.9;
+
+    /**
+     * Rate of eating meet
+     */
     private double txBoeuf;
+
+    /**
+     * Rate of eating vegetable
+     */
     private double txVege;
 
     /**
      * Class constructor specifying rate of meet and vegetarian
-     * @param txBoeuf
-     * @param txVege
+     *
+     * @param txBoeuf the rate meet
+     * @param txVege  the rate vegetable
      */
     public Alimentation(double txBoeuf, double txVege) {
         super();
@@ -26,6 +51,7 @@ public class Alimentation extends ConsoCarbone{
 
     /**
      * Get rate of meet.
+     *
      * @return rate of meet
      */
     public double getTxBoeuf() {
@@ -34,6 +60,7 @@ public class Alimentation extends ConsoCarbone{
 
     /**
      * Set rate of meet
+     *
      * @param txBoeuf rate of meet
      */
     public void setTxBoeuf(double txBoeuf) {
@@ -41,23 +68,25 @@ public class Alimentation extends ConsoCarbone{
     }
 
     /**
-     * Get rate of vegetarian
-     * @return rate of vegetarian
+     * Get rate of vegetable
+     *
+     * @return rate of vegetable
      */
     public double getTxVege() {
         return this.txVege;
     }
 
     /**
-     * Set rate of vegetarian
-     * @param txVege rate of vegetarian
+     * Set rate of vegetable
+     *
+     * @param txVege rate of vegetable
      */
     public void setTxVege(double txVege) {
         this.txVege = txVege;
     }
 
     /**
-     * Methode used for viewing the average of Empreinte Carbonne of nutrition in France.
+     * Methode used for viewing the average of Empreinte Carbone of nutrition in France.
      */
     public static void moyenEmpreinteCarboneAlimentation() {
         System.out.println(
@@ -69,7 +98,7 @@ public class Alimentation extends ConsoCarbone{
     }
 
     /**
-     * Methode used for calculating the impact of Empreinte Carbonne of nutrition.
+     * Methode used for calculating the impact of Empreinte Carbone of food.
      */
     @Override
     public void calculImpact() {
@@ -80,7 +109,7 @@ public class Alimentation extends ConsoCarbone{
 
 
     /**
-     * Methode used for viewing the necessary information of Empreinte Carbonne of nutrition.
+     * Methode used for viewing the necessary information of Empreinte Carbone of food.
      * @return information in string format.
      */
     @Override

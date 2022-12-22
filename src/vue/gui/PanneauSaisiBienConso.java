@@ -7,15 +7,51 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A PanneauSaisiBienConso objet is an JPanel
+ * who allows inputting information of BienConso
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisiBienConso extends JPanel implements ActionListener {
+
+    /**
+     * Amount label
+     */
     private JLabel lblMontant;
+
+    /**
+     * Amount text field
+     */
     private JTextField tfMontant;
+
+    /**
+     * 'Suivant' button
+     */
     private JButton btn;
+
+    /**
+     * GridBag Layout Constraints
+     */
     private GridBagConstraints gbc;
 
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau saisi bien conso.
+     *
+     * @param color      the color
+     * @param controleur the controller
+     */
     public PanneauSaisiBienConso(Color color, Controleur controleur) {
         this.color = color;
         this.controleur = controleur;
@@ -54,6 +90,11 @@ public class PanneauSaisiBienConso extends JPanel implements ActionListener {
         this.btn.addActionListener(this);
     }
 
+    /**
+     * Event associated with the button 'Suivant'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!this.tfMontant.getText().equals("")) {

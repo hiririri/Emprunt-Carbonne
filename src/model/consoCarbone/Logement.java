@@ -1,16 +1,31 @@
 package model.consoCarbone;
 
+/**
+ * A Logement objet is an AppEmpruntCarbonLogement
+ * who calculates the carbon footprint of house.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.0
+ */
 public class Logement extends ConsoCarbone {
     /**
      * House Energy Rating
      */
     private CE ce;
+
     /**
      *House size
      */
     private int superficie;
 
 
+    /**
+     * Instantiates a new Logement.
+     *
+     * @param superficie the superficie
+     * @param ce         the ce
+     */
     public Logement(int superficie, CE ce) {
         super();
 
@@ -19,24 +34,42 @@ public class Logement extends ConsoCarbone {
         this.calculImpact();
     }
 
+    /**
+     * Instantiates a new Logement.
+     */
     public Logement() {
         super();
     }
 
+    /**
+     * Gets superficie.
+     *
+     * @return the superficie
+     */
     public int getSuperficie() {
         return this.superficie;
     }
 
+    /**
+     * Sets superficie.
+     *
+     * @param superficie the superficie
+     */
     public void setSuperficie(int superficie) {
         this.superficie = superficie;
     }
 
+    /**
+     * Sets carbon energies.
+     *
+     * @param ce the ce
+     */
     public void setCe(CE ce) {
         this.ce = ce;
     }
 
     /**
-     *Average carbon footprint of a French person in relation to housing
+     * Average carbon footprint of a French person in relation to housing
      */
     public static void moyenEmpreinteCarboneLogement() {
         System.out.println(

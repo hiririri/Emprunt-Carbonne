@@ -1,22 +1,36 @@
 package vue.console;
 
 import controleur.Controleur;
-import model.consoCarbone.Avion;
-import model.utilisateur.Utilisateur;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * A MenuPrincpal objet is an AppMenu
+ * who generates different menu in console.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.2
+ */
 public class MenuPrincipal {
     private List<String> menu;
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Menu Object.
+     *
+     * @param controleur the controleur
+     */
     public MenuPrincipal(Controleur controleur) {
         this.controleur = controleur;
     }
 
+    /**
+     * Generates main menu
+     */
     public void choisirInterface() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;95m* Menu Principal *\033[m                         |");
@@ -30,6 +44,12 @@ public class MenuPrincipal {
         System.out.print("Veuillez choisir un numero : ");
     }
 
+    /**
+     * Gets action.
+     *
+     * @param etat the state
+     * @return the action
+     */
     public char getAction(int etat) {
         Scanner sc = new Scanner(System.in);
         String str = sc.next();
@@ -54,15 +74,14 @@ public class MenuPrincipal {
                     car = str.charAt(0);
                 }
             }
-            case 3 -> {
-                while (!MyExceptions.verifierSaisiEtatMenu("^[O|N]$",car))
-                    car = sc.next().charAt(0);
-            }
         }
         
         return car;
     }
 
+    /**
+     * Generates second menu
+     */
     public void frameCUI() {
         menu = new ArrayList<>();
         menu.add("1. Calculer l'empreinte carbon dans Voiture");
@@ -120,8 +139,9 @@ public class MenuPrincipal {
         }
     }
 
-
-
+    /**
+     * Print the second menu
+     */
     private void afficherMenu() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;96m* Menu Saisi *\033[m                             |");
@@ -131,6 +151,13 @@ public class MenuPrincipal {
         System.out.print(menu.get(menu.size()-1));
     }
 
+    /**
+     * Update the list menu
+     *
+     * @param secteur the sector selected
+     * @param menu the second menu object
+     * @return a new menu
+     */
     private List<String> majMenu(String secteur, List<String> menu) {
         for (int i = 0; i < menu.size(); i++)
             if (menu.get(i).contains(secteur))
@@ -146,6 +173,11 @@ public class MenuPrincipal {
         return menu;
     }
 
+    /**
+     * Generates BienConso menu
+     *
+     * @return true if action being continued, else false return to second menu
+     */
     private boolean menuBienConso() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                        \033[1;91m* Bien Consommation *\033[m                        |");
@@ -164,6 +196,11 @@ public class MenuPrincipal {
         return true;
     }
 
+    /**
+     * Generates Alimentation menu
+     *
+     * @return true if action being continued, else false return to second menu
+     */
     private boolean menuAlimentation() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                           \033[1;91m* Alimentation *\033[m                          |");
@@ -191,6 +228,13 @@ public class MenuPrincipal {
         return true;
     }
 
+    /**
+     * Check input.
+     *
+     * @param str input
+     * @param sc Scanner
+     * @return input
+     */
     private String verifierTaux(String str, Scanner sc) {
         if (str.equals("R"))
             return str;
@@ -203,6 +247,11 @@ public class MenuPrincipal {
         return str;
     }
 
+    /**
+     * Generates Logement menu
+     *
+     * @return true if action being continued, else false return to second menu
+     */
     private boolean menuLogement() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                             \033[1;91m* Logement *\033[m                            |");
@@ -234,6 +283,11 @@ public class MenuPrincipal {
         return true;
     }
 
+    /**
+     * Generates Voiture menu
+     *
+     * @return true if action being continued, else false return to second menu
+     */
     private boolean menuVoiture() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                             \033[1;91m* Voiture *\033[m                             |");
@@ -266,6 +320,12 @@ public class MenuPrincipal {
 
         return true;
     }
+
+    /**
+     * Generates Avion menu
+     *
+     * @return true if action being continued, else false return to second menu
+     */
     private boolean menuAvion() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                              \033[1;91m* Avion *\033[m                              |");
@@ -297,6 +357,9 @@ public class MenuPrincipal {
         return true;
     }
 
+    /**
+     * Read utilisateur's datas from data.txt
+     */
     public void chargerUtilisateur() {
         try {
             File file = new File("./src/data.txt");
@@ -337,6 +400,9 @@ public class MenuPrincipal {
         }
     }
 
+    /**
+     * Print new Utilisateur
+     */
     public void afficherNouvelUtilisateur() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");
@@ -347,6 +413,9 @@ public class MenuPrincipal {
         this.controleur.retourner();
     }
 
+    /**
+     * Print result panel
+     */
     public void afficherPanneauResultat() {
         System.out.println("+---------------------------------------------------------------------+");
         System.out.println("|                          \033[1;94m* Résultat *\033[m                               |");

@@ -1,5 +1,13 @@
 package model.consoCarbone;
 
+/**
+ * A ConsoCarbone objet is an AppEmpruntCarbon
+ * who calculates the carbon footprint.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.0
+ */
 public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
     /**
      * Number of class instances
@@ -7,41 +15,63 @@ public abstract class ConsoCarbone implements Comparable<ConsoCarbone> {
     private static int nbClass;
 
     /**
-     *The id of the current object
+     * The id of the current object
      */
     protected int id;
+
     /**
-     *Carbon dioxide emissions
+     * Carbon dioxide emissions
      */
     protected double impact;
 
     /**
-     *Auto-add object id
+     * Auto-add object id
      */
     public ConsoCarbone() {
         this.id = ++ConsoCarbone.nbClass;
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Gets impact.
+     *
+     * @return the impact
+     */
     public double getImpact() {
         return impact;
     }
 
+    /**
+     * Sets impact.
+     *
+     * @param impact the impact
+     */
     public void setImpact(double impact) {
         this.impact = impact;
     }
 
     /**
-     *Calculating carbon emissions
+     * Calculating carbon emissions
      */
     public abstract void calculImpact();
+
     /**
      * Method used for comparing impact of Empreinte Carbonne of nutrition.
      * @param o the object to be compared.

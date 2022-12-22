@@ -9,15 +9,55 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A PanneauSaisiTransport objet is an JPanel
+ * who allows inputting information of Transport
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisiTransport extends JPanel implements ActionListener {
+    /**
+     * Info label
+     */
     private JLabel lbl;
+
+    /**
+     * Info text field
+     */
     private JTextField textField;
+
+    /**
+     * 'Suivant' button
+     */
     private JButton btn;
+
+    /**
+     * GriaBag Layout Constraints
+     */
     private GridBagConstraints gbc;
+
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * List of sub panels
+     */
     private List<JPanel> lst;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau saisi transport.
+     *
+     * @param color      the color
+     * @param controleur the controleur
+     */
     public PanneauSaisiTransport(Color color, Controleur controleur) {
         this.controleur = controleur;
         this.color = color;
@@ -51,10 +91,11 @@ public class PanneauSaisiTransport extends JPanel implements ActionListener {
         this.btn.addActionListener(this);
     }
 
-    public boolean estNull() {
-        return this.textField.getText().equals("");
-    }
-
+    /**
+     * Event associated with the button 'Suivant'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int nbVoirture = 0;

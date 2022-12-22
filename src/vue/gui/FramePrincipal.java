@@ -8,15 +8,39 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * A FramePrincipal objet is an JFrame
+ * who allows creating a graphic interface
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class FramePrincipal extends JFrame {
+
+    /**
+     * Result panel
+     */
     private PanneauResultat panneauResultat;
+
+    /**
+     * Sector panel
+     */
     private PanneauSecteur  panneauSecteur;
+
+    /**
+     * Input panel
+     */
     private PanneauSaisi    panneauSaisi;
 
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Frame principal.
+     *
+     * @param controleur the controleur
+     */
     public FramePrincipal(Controleur controleur) {
-        super("Empreinte Carbonne");
+        super("Empreinte Carbone");
         this.controleur = controleur;
 
         try {
@@ -56,38 +80,70 @@ public class FramePrincipal extends JFrame {
         });
     }
 
+    /**
+     * Update PanneauSaisi.
+     *
+     * @param secteur the sector
+     * @param color   the color
+     */
     public void majPanneau(String secteur, Color color) {
         this.panneauSaisi.majPanneau(secteur, color);
     }
 
+    /**
+     * Set panel Avion no longer enable.
+     */
     public void terminerAvion() {
         this.panneauSecteur.terminerAvion();
     }
 
+    /**
+     * Set panel Transport no longer enable.
+     */
     public void terminerTransport() {
         this.panneauSecteur.terminerTransport();
     }
 
+    /**
+     * Set panel Alimentation no longer enable.
+     */
     public void terminerAlimentation() {
         this.panneauSecteur.terminerAlimentation();
     }
 
+    /**
+     * Set panel Logement no longer enable.
+     */
     public void terminerLogement() {
         this.panneauSecteur.terminerLogement();
     }
 
+    /**
+     * Set panel BienConso no longer enable.
+     */
     public void terminerBienConso() {
         this.panneauSecteur.terminerBienConso();
     }
 
+    /**
+     * Sets resultat pane.
+     *
+     * @param res the result
+     */
     public void setResultatPane(double res) {
         this.panneauResultat.setResultatPane(res);
     }
 
+    /**
+     * Print result.
+     */
     public void afficheResultat() {
         this.panneauSecteur.afficheResultat();
     }
 
+    /**
+     * Close graphic interface.
+     */
     public void fermerGUI() {
         this.setVisible(false);
     }

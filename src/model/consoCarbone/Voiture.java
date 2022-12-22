@@ -1,17 +1,34 @@
 package model.consoCarbone;
 
 /**
- * This is a class simulates carbon consume of Voiture
+ * A Voiture objet is an AppEmpruntCarbonVoiture
+ * who calculates the carbon footprint of air travel.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 1.0
  */
 public class Voiture extends Transport{
+    /**
+     * Car's possession
+     */
     private boolean possede;
+
+    /**
+     * Car's size
+     */
     private TailleVoiture tailleV;
+
+    /**
+     * Car's year amortization
+     */
     private int amortissement;
 
     /**
      * Class constructor specifying possession, size, kilometer and amortization of Voiture.
-     * @param tailleV size of Voiture
-     * @param kilomAnnee kilometer of Voiture
+     *
+     * @param tailleV       size of Voiture
+     * @param kilomAnnee    kilometer of Voiture
      * @param amortissement amortization of Voiture
      */
     public Voiture(TailleVoiture tailleV, int kilomAnnee, int amortissement) {
@@ -25,6 +42,9 @@ public class Voiture extends Transport{
         this.calculImpact();
     }
 
+    /**
+     * Instantiates a new Voiture.
+     */
     public Voiture() {
         super();
 
@@ -36,6 +56,7 @@ public class Voiture extends Transport{
 
     /**
      * Verify if the Voiture is under possession.
+     *
      * @return true if under possession, false if non.
      */
     public boolean isPossede() {
@@ -44,6 +65,7 @@ public class Voiture extends Transport{
 
     /**
      * Set possession.
+     *
      * @param possede possession of Voiture
      */
     public void setPossede(boolean possede) {
@@ -52,6 +74,7 @@ public class Voiture extends Transport{
 
     /**
      * Get size of Voiture.
+     *
      * @return size of Voiture
      */
     public TailleVoiture getTailleVoiture() {
@@ -60,6 +83,7 @@ public class Voiture extends Transport{
 
     /**
      * Set size of Voiture.
+     *
      * @param tailleV size of Voiture
      */
     public void setTailleVoiture(TailleVoiture tailleV) {
@@ -69,6 +93,7 @@ public class Voiture extends Transport{
 
     /**
      * Get amortization of Voiture.
+     *
      * @return amortization of Voiture
      */
     public int getAmortissement() {
@@ -77,6 +102,7 @@ public class Voiture extends Transport{
 
     /**
      * Set amortization of Voiture
+     *
      * @param amortissement amortization of Voiture
      */
     public void setAmortissement(int amortissement) {
@@ -84,7 +110,7 @@ public class Voiture extends Transport{
     }
 
     /**
-     * Methode used for calculating the impact of Empreinte Carbonne of Voiture.
+     * Methode used for calculating the impact of Empreinte Carbone of Voiture.
      */
     @Override
     public void calculImpact() {
@@ -92,7 +118,7 @@ public class Voiture extends Transport{
     }
 
     /**
-     * Methode used for viewing the necessary information of Empreinte Carbonne of Voiture.
+     * Methode used for viewing the necessary information of Empreinte Carbone of Voiture.
      * @return information in string format.
      */
     @Override

@@ -7,15 +7,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A PanneauSecteur objet is an JPanel
+ * who allows selecting different sector
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSecteur extends JPanel implements ActionListener {
+
+    /**
+     * 'Avion' button
+     */
     private JButton btnAvion;
+
+    /**
+     * 'Transport' button
+     */
     private JButton btnTransport;
+
+    /**
+     * 'Alimentation' button
+     */
     private JButton btnAlimentaiton;
+
+    /**
+     * 'BienConso' button
+     */
     private JButton btnBienConso;
+
+    /**
+     * 'Logement' button
+     */
     private JButton btnLogement;
 
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau secteur.
+     *
+     * @param controleur the controller
+     */
     public PanneauSecteur(Controleur controleur) {
         this.controleur = controleur;
 
@@ -67,6 +102,9 @@ public class PanneauSecteur extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Print result.
+     */
     public void afficheResultat() {
             this.controleur.setResultatPane(this.controleur.calculerImpact());
             if (!this.btnLogement.isEnabled() && !this.btnTransport.isEnabled() && !this.btnAvion.isEnabled() &&
@@ -80,22 +118,37 @@ public class PanneauSecteur extends JPanel implements ActionListener {
             }
     }
 
+    /**
+     * Set button Avion no longer enable.
+     */
     public void terminerAvion() {
         this.btnAvion.setEnabled(false);
     }
 
+    /**
+     * Set button Transport no longer enable.
+     */
     public void terminerTransport() {
         this.btnTransport.setEnabled(false);
     }
 
+    /**
+     * Set button Alimentation no longer enable.
+     */
     public void terminerAlimentation() {
         this.btnAlimentaiton.setEnabled(false);
     }
 
+    /**
+     * Set button Logement no longer enable.
+     */
     public void terminerBienConso() {
         this.btnBienConso.setEnabled(false);
     }
 
+    /**
+     * Set button BienConso no longer enable.
+     */
     public void terminerLogement() {
         this.btnLogement.setEnabled(false);
     }

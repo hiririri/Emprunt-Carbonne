@@ -1,17 +1,30 @@
 package model.consoCarbone;
 
 /**
- * This is a class simulates carbon consume of transport
+ * A Transport objet is an AppEmpruntCarbonTransport
+ * who calculates the carbon footprint of transport.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.0
  */
 public class Transport extends ConsoCarbone{
+
+    /**
+     * Transport's year kilometer
+     */
     private int kilomAnnee;
 
+    /**
+     * Instantiates a new Transport.
+     */
     public Transport() {
         super();
     }
 
     /**
      * Get kilometer of transport.
+     *
      * @return kilometer of transport
      */
     public int getKilomAnnee() {
@@ -20,6 +33,7 @@ public class Transport extends ConsoCarbone{
 
     /**
      * Set kilometer of transport.
+     *
      * @param kilomAnnee kilometer of transport
      */
     public void setKilomAnnee(int kilomAnnee) {

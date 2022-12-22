@@ -9,15 +9,55 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A PanneauSaisiLogement objet is an JPanel
+ * who allows inputting information of Logement
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisiLogement extends JPanel implements ActionListener {
+    /**
+     * Info label
+     */
     private JLabel lbl;
+
+    /**
+     * Info text field
+     */
     private JTextField textField;
+
+    /**
+     * 'Suivant' button
+     */
     private JButton btn;
+
+    /**
+     * GriaBag Layout Constraints
+     */
     private GridBagConstraints gbc;
+
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * List of sub panels
+     */
     private List<JPanel> lst;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau saisi logement.
+     *
+     * @param color      the color
+     * @param controleur the controller
+     */
     public PanneauSaisiLogement(Color color, Controleur controleur) {
         this.color = color;
         this.controleur = controleur;
@@ -51,6 +91,11 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
         this.btn.addActionListener(this);
     }
 
+    /**
+     * Event associated with the button 'Suivant'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int nbLogement = 0;

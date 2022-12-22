@@ -5,14 +5,44 @@ import model.consoCarbone.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * A Utilisateur objet is an AppEmpruntCarbonUtilisateur
+ * who generates a carbon emission of a person.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 1.0
+ */
 public class Utilisateur {
+
+    /**
+     * Sector alimentation
+     */
     private Alimentation   alimentation;
+
+    /**
+     * Sector bien consommation
+     */
     private BienConso      bienConso;
+
+    /**
+     * Sector public service
+     */
     private ServicePublics service;
 
+    /**
+     * List of sector houses
+     */
     private List<Logement> lstLogements;
+
+    /**
+     * List of sector transports
+     */
     private List<Transport> lstTransports;
 
+    /**
+     * Instantiates a new Utilisateur.
+     */
     public Utilisateur() {
         this.alimentation = new Alimentation(0,0);
         this.bienConso = new BienConso(0);
@@ -21,6 +51,18 @@ public class Utilisateur {
         this.lstTransports  = new ArrayList<>();
     }
 
+    /**
+     * Instantiates a new Utilisateur.
+     *
+     * @param txB           the rate meet
+     * @param txV           the rate vegetable
+     * @param montant       the amount
+     * @param superficie    the house size
+     * @param niveauEnergie the energy rate
+     * @param taille        the car size
+     * @param kilomettre    the year kilometer
+     * @param amortissement the car's year amortization
+     */
     public Utilisateur(double txB, double txV, int montant, int superficie, char niveauEnergie,
                        char taille, int kilomettre, int amortissement) {
         this.alimentation = new Alimentation(txB,txV);
@@ -32,6 +74,13 @@ public class Utilisateur {
         this.lstTransports.add(this.getVoiture(taille,kilomettre,amortissement));
     }
 
+    /**
+     * Gets logement.
+     *
+     * @param superficie    the house size
+     * @param niveauEnergie the energy rate
+     * @return the logement
+     */
     public Logement getLogement(int superficie, char niveauEnergie) {
         switch (niveauEnergie) {
             case 'A' -> {return new Logement(superficie, CE.A);}
@@ -45,6 +94,14 @@ public class Utilisateur {
         return null;
     }
 
+    /**
+     * Gets car specifying size, kilometer and amortization.
+     *
+     * @param taille        the car's size
+     * @param kilomettre    the car's year kilometer
+     * @param amortissement the car's year amortization
+     * @return the voiture
+     */
     public Voiture getVoiture(char taille, int kilomettre, int amortissement) {
         switch (taille) {
             case 'P' -> {return new Voiture(TailleVoiture.P, kilomettre, amortissement);}
@@ -53,10 +110,22 @@ public class Utilisateur {
         return null;
     }
 
+    /**
+     * Gets void car.
+     *
+     * @return the voiture
+     */
     public Voiture getVoiture() {
         return new Voiture();
     }
 
+    /**
+     * Gets avion specifying the size and kilometer.
+     *
+     * @param taille     the airplane's size
+     * @param kilomettre the air travel kilometer
+     * @return the avion
+     */
     public Avion getAvion(char taille, int kilomettre) {
         switch (taille) {
             case 'P' -> {return new Avion(TailleAvion.P, kilomettre);}
@@ -65,44 +134,92 @@ public class Utilisateur {
         return null;
     }
 
+    /**
+     * Gets void avion.
+     *
+     * @return the avion
+     */
     public Avion getAvion() {
         return new Avion();
     }
 
+    /**
+     * Sets alimentation.
+     *
+     * @param txB the rate meet
+     * @param txV the rate vegetable
+     */
     public void setAlimentation(double txB, double txV) {
         this.alimentation.setTxBoeuf(txB);
         this.alimentation.setTxVege(txV);
     }
 
+    /**
+     * Sets bien conso.
+     *
+     * @param montant the montant
+     */
     public void setBienConso(int montant) {
         this.bienConso.setMontant(montant);
     }
 
+    /**
+     * Sets alimentation.
+     *
+     * @param alimentation the alimentation
+     */
     public void setAlimentation(Alimentation alimentation) {
         this.alimentation = alimentation;
     }
 
+    /**
+     * Sets bien conso.
+     *
+     * @param bienConso the bien conso
+     */
     public void setBienConso(BienConso bienConso) {
         this.bienConso = bienConso;
     }
 
+    /**
+     * Sets services.
+     *
+     * @param services the services
+     */
     public void setServices(ServicePublics services) {
         this.service = services;
     }
 
+    /**
+     * Gets service publics.
+     *
+     * @return the service publics
+     */
     public ServicePublics getServicePublics() {
         return this.service;
     }
 
+    /**
+     * Add house.
+     *
+     * @param logement the house
+     */
     public void addLogement(Logement logement) {
         this.lstLogements.add(logement);
     }
 
+    /**
+     * Add transport : car or airplane.
+     *
+     * @param transport the transport
+     */
     public void addTransport(Transport transport) {
         this.lstTransports.add(transport);
     }
 
     /**
+     * Calculer impact double.
+     *
      * @return This method returns the sum of all carbon emissions
      */
     public double calculerImpact() {
@@ -129,10 +246,20 @@ public class Utilisateur {
                this.getImpactTransports();
     }
 
+    /**
+     * Gets all the carbone emissions of transports
+     *
+     * @return This method returns the sum of all transports' carbon emissions
+     */
     private double getImpactTransports() {
         return this.lstTransports.stream().mapToDouble(Transport::getImpact).sum();
     }
 
+    /**
+     * Gets all the carbone emissions of houses
+     *
+     * @return This method returns the sum of all houses' carbon emissions
+     */
     private double getImpactLogements() {
         return this.lstLogements.stream().mapToDouble(Logement::getImpact).sum();
     }
@@ -175,7 +302,7 @@ public class Utilisateur {
     }
 
     /**
-     * orders the user's carbon consumption in a list and presents the information to the user,
+     * Orders the user's carbon consumption in a list and presents the information to the user,
      * then makes recommendations for a more sustainable lifestyle.
      */
     public void recommender() {
@@ -221,6 +348,9 @@ public class Utilisateur {
         }
     }
 
+    /**
+     * @return Returns a string containing the current member Utilisateur
+     */
     @Override
     public String toString() {
         return "Utilisateur{" +

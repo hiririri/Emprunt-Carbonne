@@ -5,15 +5,38 @@ import controleur.Controleur;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A PanneauResultat objet is an JPanel
+ * who allows seeing the result of calculating carbon emissions
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauResultat extends JPanel {
+    /**
+     * Information label
+     */
     private JLabel lblInfo;
+
+    /**
+     * Data label
+     */
     private JLabel lblData;
+
+    /**
+     * Unit label
+     */
     private JLabel lblUnite;
 
-    public PanneauResultat(Controleur controler) {
+    /**
+     * Instantiates a new Panneau resultat.
+     *
+     * @param controleur the controller
+     */
+    public PanneauResultat(Controleur controleur) {
         this.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 0));
 
-        this.lblInfo = new JLabel("Mon Emprunt Carbonne :");
+        this.lblInfo = new JLabel("Mon Empreinte Carbone :");
         this.lblData = new JLabel("0.0");
         this.lblUnite = new JLabel("tonnes de CO2/an");
 
@@ -31,6 +54,11 @@ public class PanneauResultat extends JPanel {
         this.add(this.lblUnite);
     }
 
+    /**
+     * Sets result pane.
+     *
+     * @param res the result
+     */
     public void setResultatPane(double res) {
         this.lblData.setText(String.format("%.2f", res));
     }

@@ -1,14 +1,23 @@
 package model.consoCarbone;
 
 /**
- * This is a class simulates carbon consume of object bought.
+ * A BienConso objet is an AppEmpreinteCarbonBienConsommation
+ * who calculates the carbon footprint of money spent.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 3.0
  */
 public class BienConso extends ConsoCarbone{
+    /**
+     * The amount annual
+     */
     private double montant;
 
     /**
      * Class constructor specifying amount of object bought.
-     * @param montant
+     *
+     * @param montant the amount
      */
     public BienConso(double montant) {
         super();
@@ -19,7 +28,8 @@ public class BienConso extends ConsoCarbone{
 
     /**
      * Get amount.
-     * @return amount
+     *
+     * @return amount montant
      */
     public double getMontant() {
         return montant;
@@ -27,6 +37,7 @@ public class BienConso extends ConsoCarbone{
 
     /**
      * Set amount.
+     *
      * @param montant amount
      */
     public void setMontant(double montant) {
@@ -34,7 +45,7 @@ public class BienConso extends ConsoCarbone{
     }
 
     /**
-     * Methode used for calculating the impact of Empreinte Carbonne of object bought.
+     * Methode used for calculating the impact of Empreinte Carbone of object bought.
      */
     @Override
     public void calculImpact() {
@@ -42,7 +53,7 @@ public class BienConso extends ConsoCarbone{
     }
 
     /**
-     * Methode used for viewing the necessary information of Empreinte Carbonne of object bought.
+     * Methode used for viewing the necessary information of Empreinte Carbone of object bought.
      * @return information in string format.
      */
     @Override
@@ -53,7 +64,7 @@ public class BienConso extends ConsoCarbone{
     }
 
     /**
-     * Methode used for viewing the average of Empreinte Carbonne of object bought in France.
+     * Methode used for viewing the average of Empreinte Carbone of object bought in France.
      */
     public static void moyenEmpreinteCarboneBienConso() {
         System.out.println(

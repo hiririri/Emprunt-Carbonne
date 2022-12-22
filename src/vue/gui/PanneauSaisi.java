@@ -7,15 +7,85 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * A PanneauSaisi objet is an JPanel
+ * who allows inputting information
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisi extends JPanel implements ActionListener {
+
+    /**
+     * Sector label
+     */
     private JLabel lbl;
+
+    /**
+     * Icon label
+     */
     private JLabel lblIcon;
+
+    /**
+     * 'Commencer' button
+     */
     private JButton btn;
+
+    /**
+     * Sector
+     */
     private String secteur;
+
+    /**
+     * GridBag Layout Constraints
+     */
     private GridBagConstraints gbc;
+
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Panel Transport
+     */
+    private PanneauSaisiTransport pst;
+
+    /**
+     * Panel Logement
+     */
+    private PanneauSaisiLogement psl;
+
+    /**
+     * Panel Alimentation
+     */
+    private PanneauSaisiAlimentation psa;
+
+    /**
+     * Panel BienConso
+     */
+    private PanneauSaisiBienConso psbc;
+
+    /**
+     * Panel Avion
+     */
+    private PanneauSaisiAvion psva;
+
+    /**
+     * Scroll pane
+     */
+    private JScrollPane scrollPane;
+
+    /**
+     * Instantiates a new Panneau saisi.
+     *
+     * @param controleur the controleur
+     */
     public PanneauSaisi(Controleur controleur) {
         this.controleur = controleur;
         this.secteur = "Avion";
@@ -52,6 +122,11 @@ public class PanneauSaisi extends JPanel implements ActionListener {
         this.setBackground(this.color);
     }
 
+    /**
+     * Set panel state.
+     *
+     * @param isCommence if button 'Commencer' is clicked.
+     */
     private void setEtat(boolean isCommence) {
         this.lbl.setVisible(isCommence);
         this.lblIcon.setVisible(isCommence);
@@ -80,6 +155,12 @@ public class PanneauSaisi extends JPanel implements ActionListener {
         this.repaint();
     }
 
+    /**
+     * Update panel.
+     *
+     * @param secteur the sector
+     * @param color   the color
+     */
     public void majPanneau(String secteur, Color color) {
         this.secteur = secteur;
         this.color = color;
@@ -91,12 +172,12 @@ public class PanneauSaisi extends JPanel implements ActionListener {
         this.psl = null;
         this.pst = null;
     }
-    private PanneauSaisiTransport pst;
-    private PanneauSaisiLogement psl;
-    private PanneauSaisiAlimentation psa;
-    private PanneauSaisiBienConso psbc;
-    private PanneauSaisiAvion psva;
-    private JScrollPane scrollPane;
+
+    /**
+     * Event associated with the button 'Commencer'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.setEtat(false);

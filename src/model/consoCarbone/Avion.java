@@ -1,12 +1,28 @@
 package model.consoCarbone;
 
+/**
+ * A Alimentation objet is an AppEmpruntCarbonAvion
+ * who calculates the carbon footprint of air travel.
+ *
+ * @author Qinming JIANG
+ * @author Shenqi MA
+ * @version 1.0
+ */
 public class Avion extends Transport{
+    /**
+     * Air travel or not
+     */
     private boolean voyagerEnAvion;
+
+    /**
+     * Airplane's size
+     */
     private TailleAvion tailleA;
 
     /**
      * Class constructor specifying possession, size, kilometer and amortization of Avion.
-     * @param tailleA size of Avion
+     *
+     * @param tailleA    size of Avion
      * @param kilomAnnee kilometer of Avion
      */
     public Avion(TailleAvion tailleA, int kilomAnnee) {
@@ -18,21 +34,24 @@ public class Avion extends Transport{
         this.calculImpact();
     }
 
+    /**
+     * Instantiates a new Avion.
+     */
     public Avion() {
         super();
     }
 
     /**
-     * Methode used for calculating the impact of Empreinte Carbonne of Avion.
+     * Methode used for calculating the impact of Empreinte Carbone of Avion.
      */
     @Override
     public void calculImpact() {
-        this.impact = this.voyagerEnAvion ? this.tailleA.emet * (this.getKilomAnnee() - 200) : 0;
+        this.impact = this.voyagerEnAvion ? this.tailleA.emet * this.getKilomAnnee() : 0;
     }
 
 
    /**
-    * Methode used for viewing the necessary information of Empreinte Carbonne of Avion.
+    * Methode used for viewing the necessary information of Empreinte Carbone of Avion.
     * @return information in string format.
     */
    @Override

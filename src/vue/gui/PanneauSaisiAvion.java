@@ -9,15 +9,56 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A PanneauSaisiAvion objet is an JPanel
+ * who allows inputting information of Avion
+ *
+ * @author Qinming JIANG
+ * @version 1.0
+ */
 public class PanneauSaisiAvion extends JPanel implements ActionListener {
+
+    /**
+     * Info label
+     */
     private JLabel lbl;
+
+    /**
+     * Info text field
+     */
     private JTextField textField;
+
+    /**
+     * 'Suivant' button
+     */
     private JButton btn;
+
+    /**
+     * GridBag Layout Constraints
+     */
     private GridBagConstraints gbc;
+
+    /**
+     * Panel color
+     */
     private Color color;
+
+    /**
+     * List of sub panels
+     */
     private List<JPanel> lst;
+
+    /**
+     * Controller
+     */
     private Controleur controleur;
 
+    /**
+     * Instantiates a new Panneau saisi avion.
+     *
+     * @param color      the color
+     * @param controleur the controleur
+     */
     public PanneauSaisiAvion(Color color, Controleur controleur) {
         this.controleur = controleur;
         this.color = color;
@@ -51,10 +92,11 @@ public class PanneauSaisiAvion extends JPanel implements ActionListener {
         this.btn.addActionListener(this);
     }
 
-    public boolean estNull() {
-        return this.textField.getText().equals("");
-    }
-
+    /**
+     * Event associated with the button 'Suivant'
+     *
+     * @param e event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int nbVoyage = 0;
