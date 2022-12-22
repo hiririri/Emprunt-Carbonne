@@ -124,7 +124,7 @@ public class PanneauSaisiLogement extends JPanel implements ActionListener {
                         JLabel j2 = new JLabel("m2");
                         j2.setFont(new Font("Comic Sans MS", Font.BOLD|Font.ITALIC, 12));
                         j2.setForeground(Color.white);
-                        JComboBox ceLog = new JComboBox(new String[]{"A","B","C","D","E","F","G"});
+                        JComboBox<String> ceLog = new JComboBox<String>(new String[]{"A","B","C","D","E","F","G"});
                         ceLog.setSelectedIndex(0);
 
                         panel.add(l1);
