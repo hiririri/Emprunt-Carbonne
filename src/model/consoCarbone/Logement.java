@@ -1,7 +1,13 @@
 package model.consoCarbone;
 
 public class Logement extends ConsoCarbone {
+    /**
+     * House Energy Rating
+     */
     private CE ce;
+    /**
+     *House size
+     */
     private int superficie;
 
 
@@ -29,6 +35,9 @@ public class Logement extends ConsoCarbone {
         this.ce = ce;
     }
 
+    /**
+     *Average carbon footprint of a French person in relation to housing
+     */
     public static void moyenEmpreinteCarboneLogement() {
         System.out.println(
                 "Empreinte carbone moyenne d'un français par rapport au logement : \n" +
@@ -37,11 +46,17 @@ public class Logement extends ConsoCarbone {
                 "Energie et utilités : 1696 Kg eq CO2/an");
     }
 
+    /**
+     *Calculate CO2 emissions and update member variables
+     */
     @Override
     public void calculImpact() {
         this.impact = this.ce.alpha * this.superficie;
     }
 
+    /**
+     * @return Returns a string containing the current member variable
+     */
     @Override
     public String toString() {
         return String.format("Logement{" +

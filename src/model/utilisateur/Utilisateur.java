@@ -102,6 +102,9 @@ public class Utilisateur {
         this.lstTransports.add(transport);
     }
 
+    /**
+     * @return This method returns the sum of all carbon emissions
+     */
     public double calculerImpact() {
         if (this.lstLogements.size() != 0)
             for (Logement logement : this.lstLogements)
@@ -134,6 +137,9 @@ public class Utilisateur {
         return this.lstLogements.stream().mapToDouble(Logement::getImpact).sum();
     }
 
+    /**
+     * The method outputs details of carbon emissions for each category
+     */
     public void detaillerEmpreinte() {
         this.calculerImpact();
 
@@ -168,6 +174,10 @@ public class Utilisateur {
         System.out.println(dtl);
     }
 
+    /**
+     * orders the user's carbon consumption in a list and presents the information to the user,
+     * then makes recommendations for a more sustainable lifestyle.
+     */
     public void recommender() {
         HashMap<String, Double> map = new HashMap<>();
 
