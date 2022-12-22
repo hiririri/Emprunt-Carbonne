@@ -1,0 +1,32 @@
+./model/consoCarbone/CE.java -encoding UTF-8
+./model/consoCarbone/TailleVoiture.java -encoding UTF-8
+./model/consoCarbone/TailleAvion.java -encoding UTF-8
+./model/consoCarbone/ConsoCarbone.java -encoding UTF-8
+./model/consoCarbone/Alimentation.java -encoding UTF-8
+./model/consoCarbone/BienConso.java -encoding UTF-8
+./model/consoCarbone/Transport.java -encoding UTF-8
+./model/consoCarbone/Voiture.java -encoding UTF-8
+./model/consoCarbone/Avion.java -encoding UTF-8
+./model/consoCarbone/Logement.java -encoding UTF-8
+./model/consoCarbone/ServicePublics.java -encoding UTF-8
+
+./model/utilisateur/Utilisateur.java -encoding UTF-8
+
+./model/test/ServicePublicsTest.java -encoding UTF-8
+./model/test/VoitureTest.java -encoding UTF-8
+
+./vue/console/MenuPrincipal.java -encoding UTF-8
+./vue/console/MyExceptions.java -encoding UTF-8
+
+./vue/gui/FramePrincipal.java -encoding UTF-8
+./vue/gui/NumberDocument.java -encoding UTF-8
+./vue/gui/PanneauResultat.java -encoding UTF-8
+./vue/gui/PanneauSaisi.java -encoding UTF-8
+./vue/gui/PanneauSaisiAlimentation.java -encoding UTF-8
+./vue/gui/PanneauSaisiBienConso.java -encoding UTF-8
+./vue/gui/PanneauSaisiLogement.java -encoding UTF-8
+./vue/gui/PanneauSaisiTransport.java -encoding UTF-8
+./vue/gui/PanneauSaisiAvion.java -encoding UTF-8
+./vue/gui/PanneauSecteur.java -encoding UTF-8
+
+./controleur/Controleur.java -encoding UTF-8
